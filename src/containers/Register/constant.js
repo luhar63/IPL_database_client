@@ -1,0 +1,4 @@
+export const LOGIN_FETCH = 'LOGIN_FETCH';
+export const LOGIN_FETCHING = 'LOGIN_FETCHING';
+export const LOGIN_FETCHED = 'LOGIN_FETCHED';
+export const LOGIN_ERROR_FETCH = 'LOGIN_ERROR_FETCH';

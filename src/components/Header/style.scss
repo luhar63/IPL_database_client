@@ -1,0 +1,23 @@
+/*.header {
+  background: #f34436;
+  text-align: center;
+  color: #fff;
+  font-size: 25px;
+  line-height: 50px;
+  height: 50px;
+  border-bottom: 1px solid #1f1f1f;
+}*/
+
+.nav-head {
+  background: #f34436;
+  border-bottom: 1px solid #1f1f1f;
+
+  .navbar-brand {
+    color: #fff;
+  }
+  .navbar-nav {
+    .nav-link {
+      color: #fff;
+    }
+  }
+}
