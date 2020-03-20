@@ -42,3 +42,7 @@ build
 
 #package-lock
 package-lock.json
+
+#vscode extensions
+.vscode
+.history
