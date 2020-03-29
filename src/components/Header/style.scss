@@ -25,5 +25,9 @@
   justify-content: center;
   .nav-link {
     color: #536b69;
+    &.active {
+      pointer-events: none;
+      border-bottom: 2px solid $color-seondary-text;
+    }
   }
 }

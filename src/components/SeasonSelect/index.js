@@ -24,7 +24,7 @@ class SeasonSelect extends Component {
                 label: `Season ${item.id} (${item.year})`}));
         }
         return (
-            <Select className={className} isLoading={season.isFetching} options={options} />
+            <Select placeholder="Select Season" className={className} isLoading={season.isFetching} options={options} />
         );
     }
 }

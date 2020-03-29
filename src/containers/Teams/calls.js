@@ -21,7 +21,16 @@ export function fetchTeams() {
         axios
             .get(teams)
             .then(response => {
-                dispatch(teamsFetchedAction(response));
+                if(Array.isArray(response.data)){
+                    dispatch(teamsFetchedAction(response.data));
+                }
+                else if(response.data.errNum) {
+                    toast(getMessage('error', 'Error in database!'), {
+                        position: toast.POSITION.TOP_CENTER,
+                        className: getClasses('error')
+                    });
+                }
+
                 // toast(getMessage('error', 'Successfully logged in!'), {
                 //     position: toast.POSITION.TOP_CENTER,
                 //     className: getClasses('success')

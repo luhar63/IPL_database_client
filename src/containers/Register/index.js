@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import Header from 'Components/Header';
 import { Form, Button } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './style.scss';
 
@@ -11,13 +11,14 @@ class Register extends Component {
     state = {};
 
     render() {
+        const {match} = this.props;
         return (
             <div>
                 <Helmet>
                     <meta charSet="utf-8" />
                     <title>Register</title>
                 </Helmet>
-                <Header />
+                <Header match={match}/>
                 <h1 className="text-center">Register</h1>
                 <div className="form-wrapper">
                     <Form className="register-form">
@@ -74,6 +75,7 @@ class Register extends Component {
 }
 Register.propTypes = {
     // children: PropTypes.element
+    match: PropTypes.instanceOf(Object).isRequired
 };
 const mapStateToProps = state => ({ user: state.user });
 const mapDispatchToProps = {};

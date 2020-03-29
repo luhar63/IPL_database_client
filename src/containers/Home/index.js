@@ -34,13 +34,14 @@ class Home extends Component {
 
   render() {
       const {email, password} = this.state;
+      const {match} = this.props;
       return (
           <div>
               <Helmet>
                   <meta charSet="utf-8" />
                   <title>Login</title>
               </Helmet>
-              <Header />
+              <Header match={match}/>
               <h1 className="text-center">Log in</h1>
               <div className="form-wrapper">
                   <Form className="login-form" onSubmit={this.submitForm}>
@@ -74,7 +75,8 @@ class Home extends Component {
 Home.propTypes = {
     // children: PropTypes.element
     resetLogin: PropTypes.func.isRequired,
-    fetchLogin: PropTypes.func.isRequired
+    fetchLogin: PropTypes.func.isRequired,
+    match: PropTypes.instanceOf(Object).isRequired
 
 };
 const mapStateToProps = state => ({ user: state.user });

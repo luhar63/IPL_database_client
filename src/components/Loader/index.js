@@ -5,9 +5,10 @@ import './style.scss';
 // import mainLogo from 'Assets/images/logo.png';
 
 function Loader({ className }) {
-    const classname = `lds-ellipsis ${className}`;
+    const classname = `loader ${className||''}`;
     return (
-        <div className={classname}><div></div><div></div><div></div><div></div></div>
+        <div className={classname}> <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
+       
     );
 }
 
