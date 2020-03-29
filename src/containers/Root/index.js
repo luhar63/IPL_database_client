@@ -4,15 +4,15 @@ import { ToastContainer } from 'react-toastify';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Login from 'Containers/Login/Loadable';
+import Home from 'Containers/Home/Loadable';
 import Register from 'Containers/Register/Loadable';
+import Page404 from 'Containers/Page404/Loadable';
+import Teams from 'Containers/Teams/Loadable';
 import ToastClose from 'Components/ToastClose';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import './style.scss';
 import './normalize.scss';
-
-// import NotFoundPage from './NotFoundPage';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -32,12 +32,22 @@ class Root extends Component {
                   closeButton={<ToastClose className="fa fa-times" />}
               />
               <Switch>
-                  <Redirect exact from="/" to="/login" />
-                  <Route exact path="/login" render={props => <Login {...props} />} />
+                  <Redirect exact from="/" to="/home" />
+                  <Route exact path="/home" render={props => <Home {...props} />} />
                   <Route
                       exact
-                      path="/register"
+                      path="/matches"
                       render={props => <Register {...props} />}
+                  />
+                  <Route
+                      exact
+                      path="/teams"
+                      render={props => <Teams {...props} />}
+                  />
+                  <Route
+                      exact
+                      path="*"
+                      render={props => <Page404 {...props} />}
                   />
               </Switch>
           </div>

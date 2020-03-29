@@ -8,16 +8,22 @@
   border-bottom: 1px solid #1f1f1f;
 }*/
 
+@import '../../assets/css/variable.scss';
 .nav-head {
-  background: #f34436;
-  border-bottom: 1px solid #1f1f1f;
-
-  .navbar-brand {
-    color: #fff;
-  }
-  .navbar-nav {
-    .nav-link {
-      color: #fff;
+  background: transparent;
+  border-bottom: 1px solid #b9b3b3;
+  justify-content: center;
+  .brand {
+    font-size: 30px;
+    color: #444;
+    span {
+      color: $color-seondary-text;
     }
+  }
+}
+.menu-nav {
+  justify-content: center;
+  .nav-link {
+    color: #536b69;
   }
 }

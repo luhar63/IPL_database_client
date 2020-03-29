@@ -1,0 +1,5 @@
+export const TEAMS_FETCH = 'TEAMS_FETCH';
+export const TEAMS_FETCHING = 'TEAMS_FETCHING';
+export const TEAMS_FETCHED = 'TEAMS_FETCHED';
+export const TEAMS_ERROR_FETCH = 'TEAMS_ERROR_FETCH';
+

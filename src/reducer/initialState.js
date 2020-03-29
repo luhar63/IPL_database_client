@@ -1,3 +1,5 @@
 export default {
-    user: {}
+    season:{},
+    home: {},
+    teams:{}
 };

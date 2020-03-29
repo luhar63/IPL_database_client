@@ -3,27 +3,27 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import Header from 'Components/Header';
 import { Form, Button } from 'react-bootstrap';
-import { loginFetch, loginReset } from 'Containers/Login/calls';
-// import PropTypes from 'prop-types';
+import { loginFetch, loginReset } from 'Containers/Home/calls';
+import PropTypes from 'prop-types';
 
 import './style.scss';
 
-class Login extends Component {
+class Home extends Component {
   state = {
       email: '',
       password: ''
   };
 
   componentWillUnmount() {
-      const { loginReset } = this.props;
-      loginReset();
+      const { resetLogin } = this.props;
+      resetLogin();
   }
 
   submitForm = e => {
-      const { loginFetch } = this.props;
+      const { fetchLogin } = this.props;
       e.preventDefault();
       const { email, password } = this.state;
-      loginFetch(email, password);
+      fetchLogin(email, password);
   };
 
   handleChange = (label, e) => {
@@ -33,6 +33,7 @@ class Login extends Component {
   };
 
   render() {
+      const {email, password} = this.state;
       return (
           <div>
               <Helmet>
@@ -47,8 +48,8 @@ class Login extends Component {
                           <Form.Label>Email address</Form.Label>
                           <Form.Control
                               type="email"
-                              value={this.state.email}
-                              onChange={this.handleChange.bind(this, 'email')}
+                              value={email}
+                              onChange={() => {this.handleChange(this, 'email');}}
                               placeholder="Enter email"
                           />
                       </Form.Group>
@@ -57,8 +58,8 @@ class Login extends Component {
                           <Form.Control
                               type="password"
                               placeholder="Password"
-                              value={this.state.password}
-                              onChange={this.handleChange.bind(this, 'password')}
+                              value={password}
+                              onChange={() => {this.handleChange(this, 'password');}}
                           />
                       </Form.Group>
                       <Button variant="primary" type="submit">
@@ -70,16 +71,19 @@ class Login extends Component {
       );
   }
 }
-Login.propTypes = {
+Home.propTypes = {
     // children: PropTypes.element
+    resetLogin: PropTypes.func.isRequired,
+    fetchLogin: PropTypes.func.isRequired
+
 };
 const mapStateToProps = state => ({ user: state.user });
 const mapDispatchToProps = {
-    loginFetch,
-    loginReset
+    fetchLogin: loginFetch,
+    resetLogin: loginReset
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Login);
+)(Home);

@@ -1,9 +1,9 @@
 import objectAssign from 'object-assign';
 import {
-    LOGIN_FETCH,
-    LOGIN_FETCHING,
-    LOGIN_FETCHED,
-    LOGIN_ERROR_FETCH
+    TEAMS_FETCH,
+    TEAMS_FETCHING,
+    TEAMS_FETCHED,
+    TEAMS_ERROR_FETCH
 } from './constant';
 
 import initialState from '../../reducer/initialState';
@@ -13,27 +13,27 @@ import initialState from '../../reducer/initialState';
 // create a copy of the state passed and set new values on the copy.
 // Note that I'm using Object.assign to create a copy of current state
 // and update values on the copy.
-export default function loginReducer(state = initialState.user, action) {
+export default function teamsReducer(state = initialState.teams, action) {
     let newState;
 
     switch (action.type) {
-    case LOGIN_FETCH:
+    case TEAMS_FETCH:
         // For this example, just simulating a save by changing date modified.
         // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
-        return objectAssign({}, state, { isLoading: false, error: null, data: null });
-    case LOGIN_FETCHING:
-        return objectAssign({}, state, { isLoading: true, error: null, data: null });
+        return objectAssign({}, state, { isFetching: false, error: null, data: null });
+    case TEAMS_FETCHING:
+        return objectAssign({}, state, { isFetching: true, error: null, data: null });
 
-    case LOGIN_FETCHED:
+    case TEAMS_FETCHED:
         newState = objectAssign({}, state);
         newState.data = action.payload;
-        newState.isLoading = false;
+        newState.isFetching = false;
         return newState;
 
-    case LOGIN_ERROR_FETCH:
+    case TEAMS_ERROR_FETCH:
         newState = objectAssign({}, state);
         newState.error = action.payload;
-        newState.isLoading = false;
+        newState.isFetching = false;
         return newState;
 
     default:

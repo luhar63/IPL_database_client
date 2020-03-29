@@ -1,38 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { appName } from 'Constants/app';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 import './style.scss';
-import mainLogo from 'Assets/images/logo.png';
+// import mainLogo from 'Assets/images/logo.png';
 
 class Header extends Component {
     state = {};
 
     render() {
         return (
-            <Navbar className="nav-head">
-                <Navbar.Brand href="#home">
+            <div className="text-center">
+                <Navbar className="nav-head">
+                    {/* <Navbar.Brand href="#home" className="text-center">
                     <img
                         alt=""
                         src={mainLogo}
                         width="100"
                         height="30"
                         className="d-inline-block align-top"
-                    />
-                    {appName}
-                </Navbar.Brand>
-                <Nav className="ml-auto">
+                    /> 
+                    INSIDE <span className="secondary-text">EDGE</span>
+                </Navbar.Brand> */}
+                    <Nav className="brand"> 
+                INSIDE <span className="secondary-text">EDGE</span>
+                    </Nav>
+                    
+                </Navbar>
+                <Nav className="menu-nav">
                     <Link to="/login" className="nav-link">
-                        Login
+                        Home
                     </Link>
-                    <Link to="/register" className="nav-link">
-                        Register
+                    <Link to="/matches" className="nav-link">
+                        Matches
+                    </Link>
+                    <Link to="/stats" className="nav-link">
+                        Stats
+                    </Link>
+                    <Link to="/teams" className="nav-link">
+                        Teams
+                    </Link>
+                    <Link to="/versus" className="nav-link">
+                        Versus
                     </Link>
                 </Nav>
-            </Navbar>
+            </div>
+            
         );
     }
 }
