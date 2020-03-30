@@ -28,3 +28,13 @@
     margin: 0.1rem 0.5rem;
   }
 }
+
+.dropdown-wrapper {
+  max-width: 300px;
+  margin: 2rem auto;
+  box-sizing: border-box;
+  .drop-info {
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+}

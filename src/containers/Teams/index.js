@@ -53,8 +53,8 @@ class Teams extends Component {
                 </Helmet>
                 <Header match={match}/>
                 <div className="teams-wrapper">
-                    <div className="season-dropdown">
-                        <SeasonSelect onChange={this.changeSelect} showAll showAllValue={defaultSeasonValue}/>
+                    <div className="dropdown-wrapper">
+                        <SeasonSelect className="season-dropdown" onChange={this.changeSelect} showAll showAllValue={defaultSeasonValue}/>
                     </div>
                     <div className="team-list-wrapper">
                         {(isFetching || fakeLoader) && <Loader />}
