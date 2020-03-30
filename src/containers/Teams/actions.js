@@ -2,7 +2,7 @@ import {
     TEAMS_FETCH,
     TEAMS_FETCHING,
     TEAMS_FETCHED,
-    TEAMS_ERROR_FETCH,
+    TEAMS_ERROR_FETCH
 } from './constant';
 
 export function teamsFetchAction() {

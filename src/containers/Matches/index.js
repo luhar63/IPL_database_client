@@ -5,23 +5,22 @@ import Header from 'Components/Header';
 import Loader from 'Components/Loader';
 import SeasonSelect from 'Components/SeasonSelect';
 // import { Form, Button } from 'react-bootstrap';
-import { fetchTeams } from 'Containers/Teams/calls';
+import { fetchMatches } from 'Containers/Matches/calls';
 
 import PropTypes from 'prop-types';
 
 import './style.scss';
 import ErrorContainer from '../../components/ErrorContainer';
 
-class Teams extends Component {
+class Matches extends Component {
     state = {
-        defaultSeasonValue: {value:'all', label:'All Seasons'},
-        selectedSeason: {value:'all', label:'All Seasons'},
+        selectedSeason: null,
         fakeLoader: false
     };
 
     componentDidMount() {
-        const { fetchteams } = this.props;
-        fetchteams();
+        const { fetchmatches } = this.props;
+        fetchmatches();
     }
 
     changeSelect =(selectedSeason) => {
@@ -38,23 +37,24 @@ class Teams extends Component {
     }
 
     render() {
-        const {teams:{isFetching, error, data}, match} = this.props;
-        const {selectedSeason, defaultSeasonValue, fakeLoader} = this.state;
+        const {matches:{isFetching, error, data}, match} = this.props;
+        const {selectedSeason, fakeLoader} = this.state;
         let teams = [];
         if(!isFetching && data && selectedSeason) {
             teams = data[selectedSeason.value];
         }
         
         return (
-            <div id="teams">
+            <div id="matches">
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title>Teams</title>
+                    <title>Matches</title>
                 </Helmet>
                 <Header match={match}/>
-                <div className="teams-wrapper">
-                    <div className="season-dropdown">
-                        <SeasonSelect onChange={this.changeSelect} showAll showAllValue={defaultSeasonValue}/>
+                <div className="matches-wrapper">
+                    <div className="dropdown-wrapper">
+                        <SeasonSelect className="season-dropdown" onChange={this.changeSelect}/>
+                        {!selectedSeason && <span className='drop-info'>Select a season to see match list</span>}
                     </div>
                     <div className="team-list-wrapper">
                         {(isFetching || fakeLoader) && <Loader />}
@@ -72,16 +72,16 @@ class Teams extends Component {
         );
     }
 }
-Teams.propTypes = {
+Matches.propTypes = {
     // children: PropTypes.element
     // resetLogin: PropTypes.func.isRequired,
-    fetchteams: PropTypes.func.isRequired,
-    teams: PropTypes.instanceOf(Object).isRequired,
+    fetchmatches: PropTypes.func.isRequired,
+    matches: PropTypes.instanceOf(Object).isRequired,
     match: PropTypes.instanceOf(Object).isRequired
 };
-const mapStateToProps = state => ({ teams: state.teams });
+const mapStateToProps = state => ({ matches: state.matches });
 const mapDispatchToProps = {
-    fetchteams: fetchTeams
+    fetchmatches: fetchMatches
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Teams);
+export default connect(mapStateToProps, mapDispatchToProps)(Matches);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { login } from 'Constants/api';
+import { seasons } from 'Constants/api';
 import { toast } from 'react-toastify';
 import { getMessage, getClasses } from 'Constants/app';
 import {
@@ -19,7 +19,7 @@ export function loginFetch(email, password) {
     return dispatch => {
         dispatch(loginFetchingAction());
         axios
-            .post(login, {
+            .post(seasons, {
                 email,
                 password
             })

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Home from 'Containers/Home/Loadable';
-import Register from 'Containers/Register/Loadable';
+import Matches from 'Containers/Matches/Loadable';
 import Page404 from 'Containers/Page404/Loadable';
 import Teams from 'Containers/Teams/Loadable';
 import ToastClose from 'Components/ToastClose';
@@ -37,7 +37,7 @@ class Root extends Component {
                   <Route
                       exact
                       path="/matches"
-                      render={props => <Register {...props} />}
+                      render={props => <Matches {...props} />}
                   />
                   <Route
                       exact

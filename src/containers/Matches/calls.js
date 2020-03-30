@@ -1,28 +1,28 @@
 import axios from 'axios';
-import { teamsPerSeason } from 'Constants/api';
+import { matches } from 'Constants/api';
 import { toast } from 'react-toastify';
 import { getMessage, getClasses } from 'Constants/app';
 import {
-    teamsFetchAction,
-    teamsFetchingAction,
-    teamsFetchedAction,
-    teamsErrorFetchAction
+    matchesFetchAction,
+    matchesFetchingAction,
+    matchesFetchedAction,
+    matchesErrorFetchAction
 } from './actions';
 
-export function teamsReset() {
+export function matchesReset() {
     return dispatch => {
-        dispatch(teamsFetchAction);
+        dispatch(matchesFetchAction);
     };
 }
 
-export function fetchTeams() {
+export function fetchMatches() {
     return dispatch => {
-        dispatch(teamsFetchingAction());
+        dispatch(matchesFetchingAction());
         axios
-            .get(teamsPerSeason)
+            .get(matches)
             .then(response => {
                 if(!response.data.errNum){
-                    dispatch(teamsFetchedAction(response.data));
+                    dispatch(matchesFetchedAction(response.data));
                 }
                 else {
                     toast(getMessage('error', 'Error in database!'), {
@@ -37,8 +37,8 @@ export function fetchTeams() {
                 // });
             })
             .catch(error => {
-                dispatch(teamsErrorFetchAction(error));
-                toast(getMessage('error', 'Error in fetching teams!'), {
+                dispatch(matchesErrorFetchAction(error));
+                toast(getMessage('error', 'Error in fetching matches!'), {
                     position: toast.POSITION.TOP_CENTER,
                     className: getClasses('error')
                 });

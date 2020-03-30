@@ -17,14 +17,24 @@ class SeasonSelect extends Component {
     }
 
     render(){
-        const {className, season} = this.props;
+        const {className, season, showAll, onChange, showAllValue} = this.props;
         let options = [];
         if(season.data) {
             options = season.data.map((item)=>({value: item.id,
                 label: `Season ${item.id} (${item.year})`}));
+            if(showAll) {
+                options.splice(0,0,showAllValue);
+            }
+            
         }
         return (
-            <Select placeholder="Select Season" className={className} isLoading={season.isFetching} options={options} />
+            <Select name="season" 
+                defaultValue={showAllValue} 
+                placeholder="Select Season" 
+                onChange={onChange} 
+                className={className} 
+                isLoading={season.isFetching} 
+                options={options} />
         );
     }
 }
@@ -32,11 +42,16 @@ class SeasonSelect extends Component {
 SeasonSelect.propTypes = {
     className: PropTypes.string,
     seasonFetch: PropTypes.func.isRequired,
-    season: PropTypes.objectOf(Object).isRequired
+    season: PropTypes.objectOf(Object).isRequired,
+    showAll: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
+    showAllValue: PropTypes.instanceOf(Object)
 };
 
 SeasonSelect.getDefaultProps = {
-    className: ''
+    className: '',
+    showAll: false,
+    showAllValue: ''
 };
 
 const mapStateToProps = state => ({ season: state.season });
