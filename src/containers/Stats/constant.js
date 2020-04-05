@@ -1,0 +1,5 @@
+export const STATS_FETCH = 'STATS_FETCH';
+export const STATS_FETCHING = 'STATS_FETCHING';
+export const STATS_FETCHED = 'STATS_FETCHED';
+export const STATS_ERROR_FETCH = 'STATS_ERROR_FETCH';
+

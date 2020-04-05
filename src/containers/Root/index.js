@@ -8,6 +8,7 @@ import Home from 'Containers/Home/Loadable';
 import Matches from 'Containers/Matches/Loadable';
 import Page404 from 'Containers/Page404/Loadable';
 import Teams from 'Containers/Teams/Loadable';
+import Stats from 'Containers/Stats/Loadable';
 import ToastClose from 'Components/ToastClose';
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -43,6 +44,11 @@ class Root extends Component {
                       exact
                       path="/teams"
                       render={props => <Teams {...props} />}
+                  />
+                  <Route
+                      exact
+                      path="/stats"
+                      render={props => <Stats {...props} />}
                   />
                   <Route
                       exact

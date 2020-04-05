@@ -14,7 +14,8 @@ import ErrorContainer from '../../components/ErrorContainer';
 
 class Matches extends Component {
   state = {
-      selectedSeason: null,
+      defaultSeasonValue: { value: 'all', label: 'All Seasons' },
+      selectedSeason: { value: 'all', label: 'All Seasons' },
       fakeLoader: false
   };
 
@@ -40,7 +41,7 @@ class Matches extends Component {
           matches: { isFetching, error, data },
           match
       } = this.props;
-      const { selectedSeason, fakeLoader } = this.state;
+      const { selectedSeason, fakeLoader, defaultSeasonValue } = this.state;
       let matches = [];
       let teamMeta = {};
       if (!isFetching && data && selectedSeason) {
@@ -49,54 +50,65 @@ class Matches extends Component {
       }
 
       return (
-          <div id="matches">
+          <div id="stats">
               <Helmet>
                   <meta charSet="utf-8" />
-                  <title>Matches</title>
+                  <title>Stats</title>
               </Helmet>
               <Header match={match} />
-              <div className="matches-wrapper">
+              <div className="stats-wrapper">
                   <div className="dropdown-wrapper">
                       <SeasonSelect
                           className="season-dropdown"
                           onChange={this.changeSelect}
+                          showAll
+                          showAllValue={defaultSeasonValue}
                       />
-                      {!selectedSeason && (
-                          <span className="drop-info">
-                            Select a season to see match list
-                          </span>
-                      )}
                   </div>
                   <div className="match-list-wrapper">
                       {(isFetching || fakeLoader) && <Loader />}
                       {error && <ErrorContainer errorMessage={error} />}
                       {data &&
-                        matches &&
-                        matches.map(item => (
-                            <div
-                                className="match"
-                                key={`team#${item.id}`}
-                                id={`match#${item.id}`}
-                            >
-                                <div className={`match-team-1 ${item.team_winner_id === item.team_1_id ? 'winner':'loser'}`} >
-                                    <div
-                                        className={`team-sprite small team-${item.team_1_id}`}
-                                    ></div>
-                                    {teamMeta[item.team_1_id]}
-                                </div>
-                                <div className="vs-details">
-                                    <div className="vs"></div>
-                                    <div>{(new Date(item.match_date)).toDateString()}</div>
-                                    <div>{item.venue}, {item.city}</div>
-                                </div>
-                                <div className={`match-team-2 ${item.team_winner_id === item.team_2_id ? 'winner':'loser'}`}>
-                                    <div
-                                        className={`team-sprite small team-${item.team_2_id}`}
-                                    ></div>
-                                    {teamMeta[item.team_2_id]}
-                                </div>
-                            </div>
-                        ))}
+              matches &&
+              matches.map(item => (
+                  <div
+                      className="match"
+                      key={`team#${item.id}`}
+                      id={`match#${item.id}`}
+                  >
+                      <div
+                          className={`match-team-1 ${
+                              item.team_winner_id === item.team_1_id
+                                  ? 'winner'
+                                  : 'loser'
+                          }`}
+                      >
+                          <div
+                              className={`team-sprite small team-${item.team_1_id}`}
+                          ></div>
+                          {teamMeta[item.team_1_id]}
+                      </div>
+                      <div className="vs-details">
+                          <div className="vs"></div>
+                          <div>{new Date(item.match_date).toDateString()}</div>
+                          <div>
+                              {item.venue}, {item.city}
+                          </div>
+                      </div>
+                      <div
+                          className={`match-team-2 ${
+                              item.team_winner_id === item.team_2_id
+                                  ? 'winner'
+                                  : 'loser'
+                          }`}
+                      >
+                          <div
+                              className={`team-sprite small team-${item.team_2_id}`}
+                          ></div>
+                          {teamMeta[item.team_2_id]}
+                      </div>
+                  </div>
+              ))}
                   </div>
               </div>
           </div>
