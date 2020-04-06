@@ -1,6 +1,7 @@
 export default {
-    season:{},
+    season: {},
     home: {},
-    teams:{},
-    matches:{}
+    teams: {},
+    matches: {},
+    matchdetails: {}
 };
