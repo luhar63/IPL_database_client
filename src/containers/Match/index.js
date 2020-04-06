@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
@@ -7,29 +6,26 @@ import { Table } from 'react-bootstrap';
 
 import { fetchMatchDetails } from 'Containers/Match/calls';
 import Header from 'Components/Header';
-import './style.scss';
 import ErrorContainer from '../../components/ErrorContainer';
+import './style.scss';
 
 class Match extends Component {
 
     componentDidMount() {
-        console.log('ankurmount');
-        console.log(this.props.match);
-        const { fetchmatchdetails } = this.props;
-        fetchmatchdetails(this.props.match.params.matchid);
+        const { fetchmatchdetails, match } = this.props;
+        fetchmatchdetails(match.params.matchid);
     }
 
     render() {
-        console.log(this.props);
         const {
             matchdetails: { isFetching, error, data },
             match 
         } = this.props;
-        const matchdetails = {};
+        
         if (!isFetching && data) {
             const detail = data.matchdetails;
             console.log(detail);
-            return <div id="match-details-wrapper">
+            return (<div id="match-details-wrapper">
                 <Helmet>
                     <meta charSet="utf-8" />
                     <title>{`${detail.TEAM_1_NAME} vs ${detail.TEAM_2_NAME}`}</title>
@@ -144,7 +140,11 @@ class Match extends Component {
                         </tr>
                     </tbody>   
                 </Table>
-            </div>;
+            </div>);
+        }
+        if(error)
+        {
+            return (<ErrorContainer errorMessage={error} />);
         }
         return <div id="match-details-wrapper">
             <Helmet>
@@ -177,6 +177,12 @@ const getWicketOutput = (striker) => {
     }
     
 }; 
+Match.propTypes = {
+    matchdetails: PropTypes.instanceOf(Object).isRequired,
+    
+    fetchmatchdetails: PropTypes.func.isRequired,
+    match: PropTypes.instanceOf(Object).isRequired
+};
 
 const getDidNotBat = (inning) => inning.squad.filter((b) => {
     return !inning.batting.map((batsman) => batsman.STRIKER_NAME).includes(b[0]);}).join(', ');
