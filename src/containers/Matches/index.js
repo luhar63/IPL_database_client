@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Header from 'Components/Header';
 import Loader from 'Components/Loader';
 import SeasonSelect from 'Components/SeasonSelect';
 // import { Form, Button } from 'react-bootstrap';
 import { fetchMatches } from 'Containers/Matches/calls';
-
-import PropTypes from 'prop-types';
-
 import './style.scss';
 import ErrorContainer from '../../components/ErrorContainer';
 
@@ -74,29 +73,45 @@ class Matches extends Component {
                       {data &&
                         matches &&
                         matches.map(item => (
-                            <div
-                                className="match"
-                                key={`team#${item.id}`}
-                                id={`match#${item.id}`}
-                            >
-                                <div className={`match-team-1 ${item.team_winner_id === item.team_1_id ? 'winner':'loser'}`} >
+                            <Link to={`/match/${item.id}`}>
+                                <div
+                                    className="match"
+                                    key={`team#${item.id}`}
+                                    id={`match#${item.id}`}
+                                >
                                     <div
-                                        className={`team-sprite small team-${item.team_1_id}`}
-                                    ></div>
-                                    {teamMeta[item.team_1_id]}
-                                </div>
-                                <div className="vs-details">
-                                    <div className="vs"></div>
-                                    <div>{(new Date(item.match_date)).toDateString()}</div>
-                                    <div>{item.venue}, {item.city}</div>
-                                </div>
-                                <div className={`match-team-2 ${item.team_winner_id === item.team_2_id ? 'winner':'loser'}`}>
+                                        className={`match-tam-1 ${
+                                            item.team_winner_id === item.team_1_id
+                                                ? 'winner'
+                                                : 'loser'
+                                        }`}
+                                    >
+                                        <div
+                                            className={`team-sprite small team-${item.team_1_id}`}
+                                        ></div>
+                                        {teamMeta[item.team_1_id]}
+                                    </div>
+                                    <div className="vs-details">
+                                        <div className="vs"></div>
+                                        <div>{new Date(item.match_date).toDateString()}</div>
+                                        <div>
+                                            {item.venue}, {item.city}
+                                        </div>
+                                    </div>
                                     <div
-                                        className={`team-sprite small team-${item.team_2_id}`}
-                                    ></div>
-                                    {teamMeta[item.team_2_id]}
+                                        className={`match-team-2 ${
+                                            item.team_winner_id === item.team_2_id
+                                                ? 'winner'
+                                                : 'loser'
+                                        }`}
+                                    >
+                                        <div
+                                            className={`team-sprite small team-${item.team_2_id}`}
+                                        ></div>
+                                        {teamMeta[item.team_2_id]}
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                   </div>
               </div>

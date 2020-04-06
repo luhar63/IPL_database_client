@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Home from 'Containers/Home/Loadable';
 import Matches from 'Containers/Matches/Loadable';
+import Match from 'Containers/Match';
 import Page404 from 'Containers/Page404/Loadable';
 import Teams from 'Containers/Teams/Loadable';
 import ToastClose from 'Components/ToastClose';
@@ -38,6 +39,11 @@ class Root extends Component {
                       exact
                       path="/matches"
                       render={props => <Matches {...props} />}
+                  />
+                  <Route
+                      exact
+                      path="/match/:matchid"
+                      render={props => <Match {...props} />}
                   />
                   <Route
                       exact
