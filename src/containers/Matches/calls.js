@@ -6,12 +6,18 @@ import {
     matchesFetchAction,
     matchesFetchingAction,
     matchesFetchedAction,
-    matchesErrorFetchAction
+    matchesErrorFetchAction,
+    updateSelectedSeasonAction
 } from './actions';
 
 export function matchesReset() {
     return dispatch => {
         dispatch(matchesFetchAction);
+    };
+}
+export function updateSelectedSeason(selectedSeason) {
+    return dispatch => {
+        dispatch(updateSelectedSeasonAction(selectedSeason));
     };
 }
 
@@ -21,10 +27,9 @@ export function fetchMatches() {
         axios
             .get(matches)
             .then(response => {
-                if(!response.data.errNum){
+                if (!response.data.errNum) {
                     dispatch(matchesFetchedAction(response.data));
-                }
-                else {
+                } else {
                     toast(getMessage('error', 'Error in database!'), {
                         position: toast.POSITION.TOP_CENTER,
                         className: getClasses('error')

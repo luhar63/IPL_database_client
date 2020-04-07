@@ -2,7 +2,8 @@ import {
     MATCHES_FETCH,
     MATCHES_FETCHING,
     MATCHES_FETCHED,
-    MATCHES_ERROR_FETCH
+    MATCHES_ERROR_FETCH,
+    UPDATE_SELECTED_SEASON
 } from './constant';
 
 export function matchesFetchAction() {
@@ -31,3 +32,9 @@ export function matchesErrorFetchAction(error) {
     };
 }
 
+export function updateSelectedSeasonAction(payload) {
+    return {
+        type: UPDATE_SELECTED_SEASON,
+        payload
+    };
+}

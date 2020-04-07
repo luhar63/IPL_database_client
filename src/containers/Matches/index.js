@@ -7,39 +7,42 @@ import Header from 'Components/Header';
 import Loader from 'Components/Loader';
 import SeasonSelect from 'Components/SeasonSelect';
 // import { Form, Button } from 'react-bootstrap';
-import { fetchMatches } from 'Containers/Matches/calls';
+import { fetchMatches, updateSelectedSeason } from 'Containers/Matches/calls';
 import './style.scss';
 import ErrorContainer from '../../components/ErrorContainer';
 
 class Matches extends Component {
     state = {
-        selectedSeason: null,
         fakeLoader: false
     };
 
     componentDidMount() {
-        const { fetchmatches } = this.props;
-        fetchmatches();
+        const { fetchmatches, matches } = this.props;
+        if (matches.data == null) {
+            fetchmatches();
+        }
     }
 
     changeSelect = selectedSeason => {
         this.setState({
             fakeLoader: true
         });
+        const { updateselectedseason } = this.props;
+
         setTimeout(() => {
             this.setState({
-                selectedSeason,
                 fakeLoader: false
             });
+            updateselectedseason(selectedSeason);
         }, 1000);
     };
 
     render() {
         const {
-            matches: { isFetching, error, data },
+            matches: { isFetching, error, data, selectedSeason },
             match
         } = this.props;
-        const { selectedSeason, fakeLoader } = this.state;
+        const { fakeLoader } = this.state;
         let matches = [];
         let teamMeta = {};
         if (!isFetching && data && selectedSeason) {
@@ -57,6 +60,7 @@ class Matches extends Component {
                 <div className="matches-wrapper">
                     <div className="dropdown-wrapper">
                         <SeasonSelect
+                            value={selectedSeason}
                             className="season-dropdown"
                             onChange={this.changeSelect}
                         />
@@ -72,10 +76,12 @@ class Matches extends Component {
                         {data &&
                             matches &&
                             matches.map(item => (
-                                <Link to={`/match/${item.id}`}>
+                                <Link
+                                    to={`/match/${item.id}`}
+                                    key={`team#${item.id}`}
+                                >
                                     <div
                                         className="match"
-                                        key={`team#${item.id}`}
                                         id={`match#${item.id}`}
                                     >
                                         <div
@@ -129,11 +135,13 @@ Matches.propTypes = {
     // resetLogin: PropTypes.func.isRequired,
     fetchmatches: PropTypes.func.isRequired,
     matches: PropTypes.instanceOf(Object).isRequired,
-    match: PropTypes.instanceOf(Object).isRequired
+    match: PropTypes.instanceOf(Object).isRequired,
+    updateselectedseason: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({ matches: state.matches });
 const mapDispatchToProps = {
-    fetchmatches: fetchMatches
+    fetchmatches: fetchMatches,
+    updateselectedseason: updateSelectedSeason
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Matches);

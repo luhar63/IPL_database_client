@@ -6,6 +6,7 @@ import { Table, Tabs, Tab } from 'react-bootstrap';
 
 import { fetchMatchDetails } from 'Containers/Match/calls';
 import Header from 'Components/Header';
+import Loader from 'Components/Loader';
 import ErrorContainer from '../../components/ErrorContainer';
 import './style.scss';
 
@@ -24,9 +25,10 @@ class Match extends Component {
                     </span>
                 );
             case 'bowled':
-            case 'lbw':
             case 'hit wicket':
                 return <span>b {striker.BOWLER_NAME}</span>;
+            case 'lbw':
+                return <span>lbw b {striker.BOWLER_NAME}</span>;
             case 'stumped':
                 return (
                     <span>
@@ -87,6 +89,7 @@ class Match extends Component {
                             {detail.innings.map(inning => (
                                 <Tab
                                     className="match"
+                                    key={`team#${inning.batting[0].TEAM_BATTING_NAME}`}
                                     eventKey={`team#${inning.batting[0].TEAM_BATTING_NAME}`}
                                     id={`inning#${inning.batting[0].TEAM_BATTING_NAME}`}
                                     title={`${inning.batting[0].TEAM_BATTING_NAME} Innings`}
@@ -113,7 +116,9 @@ class Match extends Component {
                                             </thead>
                                             <tbody>
                                                 {inning.batting.map(striker => (
-                                                    <tr>
+                                                    <tr
+                                                        key={`#id-striker-${striker.STRIKER_NAME}`}
+                                                    >
                                                         <td>
                                                             {
                                                                 striker.STRIKER_NAME
@@ -140,9 +145,9 @@ class Match extends Component {
                                                         <td>{striker.FOURS}</td>
                                                         <td>{striker.SIXES}</td>
                                                         <td>
-                                                            {
-                                                                striker.STRIKE_RATE
-                                                            }
+                                                            {striker.STRIKE_RATE.toFixed(
+                                                                2
+                                                            )}
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -184,13 +189,16 @@ class Match extends Component {
 
                                             <tbody>
                                                 {inning.bowling.map(bowler => (
-                                                    <tr>
+                                                    <tr
+                                                        key={`#id-bowler-${bowler.BOWLER_NAME}`}
+                                                    >
                                                         <td>
                                                             {bowler.BOWLER_NAME}
                                                         </td>
                                                         <td>{bowler.OVERS}</td>
                                                         <td>
-                                                            {bowler.RUNS_GIVEN}
+                                                            {bowler.EXTRA_RUNS_GIVEN +
+                                                                bowler.RUNS_GIVEN}
                                                         </td>
                                                         <td>
                                                             {bowler.WICKETS}
@@ -263,7 +271,16 @@ class Match extends Component {
             );
         }
         if (error) {
-            return <ErrorContainer errorMessage={error} />;
+            return (
+                <div id="match-details-wrapper">
+                    <Helmet>
+                        <meta charSet="utf-8" />
+                        <title>Loading</title>
+                    </Helmet>
+                    <Header match={match} />
+                    <ErrorContainer errorMessage={error} />
+                </div>
+            );
         }
         return (
             <div id="match-details-wrapper">
@@ -271,6 +288,8 @@ class Match extends Component {
                     <meta charSet="utf-8" />
                     <title>Loading</title>
                 </Helmet>
+                <Header match={match} />
+                <Loader />
             </div>
         );
     }
