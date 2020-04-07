@@ -12,111 +12,117 @@ import './style.scss';
 import ErrorContainer from '../../components/ErrorContainer';
 
 class Matches extends Component {
-  state = {
-      selectedSeason: null,
-      fakeLoader: false
-  };
+    state = {
+        selectedSeason: null,
+        fakeLoader: false
+    };
 
-  componentDidMount() {
-      const { fetchmatches } = this.props;
-      fetchmatches();
-  }
+    componentDidMount() {
+        const { fetchmatches } = this.props;
+        fetchmatches();
+    }
 
-  changeSelect = selectedSeason => {
-      this.setState({
-          fakeLoader: true
-      });
-      setTimeout(() => {
-          this.setState({
-              selectedSeason,
-              fakeLoader: false
-          });
-      }, 1000);
-  };
+    changeSelect = selectedSeason => {
+        this.setState({
+            fakeLoader: true
+        });
+        setTimeout(() => {
+            this.setState({
+                selectedSeason,
+                fakeLoader: false
+            });
+        }, 1000);
+    };
 
-  render() {
-      const {
-          matches: { isFetching, error, data },
-          match
-      } = this.props;
-      const { selectedSeason, fakeLoader } = this.state;
-      let matches = [];
-      let teamMeta = {};
-      if (!isFetching && data && selectedSeason) {
-          matches = data.matches[selectedSeason.value];
-          teamMeta = data.meta.teams;
-      }
+    render() {
+        const {
+            matches: { isFetching, error, data },
+            match
+        } = this.props;
+        const { selectedSeason, fakeLoader } = this.state;
+        let matches = [];
+        let teamMeta = {};
+        if (!isFetching && data && selectedSeason) {
+            matches = data.matches[selectedSeason.value];
+            teamMeta = data.meta.teams;
+        }
 
-      return (
-          <div id="matches">
-              <Helmet>
-                  <meta charSet="utf-8" />
-                  <title>Matches</title>
-              </Helmet>
-              <Header match={match} />
-              <div className="matches-wrapper">
-                  <div className="dropdown-wrapper">
-                      <SeasonSelect
-                          className="season-dropdown"
-                          onChange={this.changeSelect}
-                      />
-                      {!selectedSeason && (
-                          <span className="drop-info">
-                            Select a season to see match list
-                          </span>
-                      )}
-                  </div>
-                  <div className="match-list-wrapper">
-                      {(isFetching || fakeLoader) && <Loader />}
-                      {error && <ErrorContainer errorMessage={error} />}
-                      {data &&
-                        matches &&
-                        matches.map(item => (
-                            <Link to={`/match/${item.id}`}>
-                                <div
-                                    className="match"
-                                    key={`team#${item.id}`}
-                                    id={`match#${item.id}`}
-                                >
+        return (
+            <div id="matches">
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Matches</title>
+                </Helmet>
+                <Header match={match} />
+                <div className="matches-wrapper">
+                    <div className="dropdown-wrapper">
+                        <SeasonSelect
+                            className="season-dropdown"
+                            onChange={this.changeSelect}
+                        />
+                        {!selectedSeason && (
+                            <span className="drop-info">
+                                Select a season to see match list
+                            </span>
+                        )}
+                    </div>
+                    <div className="match-list-wrapper">
+                        {(isFetching || fakeLoader) && <Loader />}
+                        {error && <ErrorContainer errorMessage={error} />}
+                        {data &&
+                            matches &&
+                            matches.map(item => (
+                                <Link to={`/match/${item.id}`}>
                                     <div
-                                        className={`match-tam-1 ${
-                                            item.team_winner_id === item.team_1_id
-                                                ? 'winner'
-                                                : 'loser'
-                                        }`}
+                                        className="match"
+                                        key={`team#${item.id}`}
+                                        id={`match#${item.id}`}
                                     >
                                         <div
-                                            className={`team-sprite small team-${item.team_1_id}`}
-                                        ></div>
-                                        {teamMeta[item.team_1_id]}
-                                    </div>
-                                    <div className="vs-details">
-                                        <div className="vs"></div>
-                                        <div>{new Date(item.match_date).toDateString()}</div>
-                                        <div>
-                                            {item.venue}, {item.city}
+                                            className={`match-team-1 ${
+                                                item.team_winner_id ===
+                                                item.team_1_id
+                                                    ? 'winner'
+                                                    : 'loser'
+                                            }`}
+                                        >
+                                            <div
+                                                className={`team-sprite small team-${item.team_1_id}`}
+                                            ></div>
+                                            {teamMeta[item.team_1_id]}
+                                        </div>
+                                        <div className="vs-details">
+                                            <div className="vs"></div>
+                                            <div>
+                                                {new Date(
+                                                    item.match_date
+                                                ).toDateString()}
+                                            </div>
+                                            <div>
+                                                {item.venue}, {item.city}
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={`match-team-2 ${
+                                                item.team_winner_id ===
+                                                item.team_2_id
+                                                    ? 'winner'
+                                                    : 'loser'
+                                            }`}
+                                        >
+                                            <div
+                                                className={`team-sprite small team-${item.team_2_id}`}
+                                            ></div>
+                                            {teamMeta[item.team_2_id]}
                                         </div>
                                     </div>
-                                    <div
-                                        className={`match-team-2 ${
-                                            item.team_winner_id === item.team_2_id
-                                                ? 'winner'
-                                                : 'loser'
-                                        }`}
-                                    >
-                                        <div
-                                            className={`team-sprite small team-${item.team_2_id}`}
-                                        ></div>
-                                        {teamMeta[item.team_2_id]}
-                                    </div>
-                                </div>
-                            </Link>
-                        ))}
-                  </div>
-              </div>
-          </div>
-      );
-  }
+                                </Link>
+                            ))}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 Matches.propTypes = {
     // children: PropTypes.element

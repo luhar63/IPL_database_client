@@ -9,25 +9,25 @@
 }*/
 
 @import '../../assets/css/variable.scss';
-.nav-head {
-  background: transparent;
-  border-bottom: 1px solid #b9b3b3;
-  justify-content: center;
-  .brand {
-    font-size: 30px;
-    color: #444;
-    span {
-      color: $color-seondary-text;
+.nav-head.navbar {
+    background: transparent;
+    border-bottom: 1px solid #b9b3b3;
+    justify-content: center;
+    .brand {
+        font-size: 30px;
+        color: #444;
+        span {
+            color: $color-seondary-text;
+        }
     }
-  }
 }
 .menu-nav {
-  justify-content: center;
-  .nav-link {
-    color: #536b69;
-    &.active {
-      pointer-events: none;
-      border-bottom: 2px solid $color-seondary-text;
+    justify-content: center;
+    .nav-link {
+        color: #536b69;
+        &.active {
+            pointer-events: none;
+            border-bottom: 2px solid $color-seondary-text;
+        }
     }
-  }
 }

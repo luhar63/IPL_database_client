@@ -29,7 +29,18 @@ module.exports = {
         jest: true
     },
     rules: {
-        indent: ['error', 4],
+        indent: [
+            'error',
+            4,
+            {
+                SwitchCase: 1,
+                CallExpression: { arguments: 1 },
+                FunctionExpression: { body: 1, parameters: 2 },
+                flatTernaryExpressions: true,
+                ignoredNodes: ['ConditionalExpression > CallExpression']
+            }
+        ],
+        'no-unused-vars': ['error', { args: 'none' }],
         'space-before-function-paren': 'off',
         'react/prefer-stateless-function': 'warn',
         'react/jsx-one-expression-per-line': 'off',
