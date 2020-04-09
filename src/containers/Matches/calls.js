@@ -27,7 +27,7 @@ export function fetchMatches() {
         axios
             .get(matches)
             .then(response => {
-                if (!response.data.errNum) {
+                if (!response.data.errorNum) {
                     dispatch(matchesFetchedAction(response.data));
                 } else {
                     toast(getMessage('error', 'Error in database!'), {

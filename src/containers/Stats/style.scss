@@ -1,71 +1,70 @@
 @import '../../assets/css/variable.scss';
 .form-wrapper {
-  max-width: 500px;
-  margin: 0 auto;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-.match-list-wrapper {
-  max-width: 960px;
-  margin: 0 auto;
-  position: relative;
-  min-height: 300px;
-  .match {
-    padding: 0.8rem 1rem;
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-    margin-bottom: 20px;
-    color: $color-text;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    & > .loser {
-      background: url('../../assets/images/lost.png') no-repeat;
-      background-size: 251px 157px;
+.stats-wrapper {
+    margin: 0 auto;
+    .main-content {
+        max-width: 1256px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: flex-start;
     }
-  }
-  .match-team-1 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-basis: 33%;
-    &.loser {
-      background-position: 48% 71%;
+    .stats-filter {
+        min-width: 200px;
+        min-height: 300px;
+        position: relative;
+        .filters {
+            border: 1px solid #d83b3b;
+        }
+        h5 {
+            padding: 5px 10px;
+            background-color: #d83b3b;
+            color: white;
+            margin: 0;
+        }
+        ul {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+            min-height: 100px;
+            li {
+                border-bottom: 1px solid #e2e1e1;
+                .filter-anchor {
+                    padding: 10px;
+                    display: block;
+                    text-decoration: none;
+                    width: 100%;
+                    text-align: left;
+                    &:hover {
+                        color: #ff6161;
+                    }
+                    &.active {
+                        color: $color-seondary-text;
+                    }
+                }
+            }
+        }
     }
-  }
-  .match-team-2 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    flex-basis: 33%;
-    &.loser {
-      background-position: 48% 71%;
+    .stats-main {
+        width: 100%;
+        margin: 0 20px;
+        position: relative;
+        .table {
+            .active {
+                background-color: #ebf99454;
+            }
+        }
     }
-  }
-  .team-sprite {
-    margin: 0.1rem 0.5rem;
-  }
-  .vs-details {
-    flex-basis: 33%;
-    text-align: center;
-    font-size: 14px;
-
-    .vs {
-      background: url('../../assets/images/versus.png') no-repeat;
-      background-size: 60px 70px;
-      background-position: 50%;
-      width: 60px;
-      height: 70px;
-      margin: 0 auto;
-    }
-  }
 }
 .dropdown-wrapper {
-  max-width: 300px;
-  margin: 2rem auto;
-  box-sizing: border-box;
-  .drop-info {
-    font-size: 0.9rem;
-    font-style: italic;
-  }
+    max-width: 300px;
+    margin: 2rem auto;
+    box-sizing: border-box;
+    .drop-info {
+        font-size: 0.9rem;
+        font-style: italic;
+    }
 }

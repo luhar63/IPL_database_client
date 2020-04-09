@@ -20,15 +20,14 @@ export function fetchMatchDetails(matchId) {
         dispatch(matchDetailsFetchingAction());
         axios
             .get(match, {
-                params : {
+                params: {
                     matchid: matchId
                 }
             })
             .then(response => {
-                if(!response.data.errNum){
+                if (!response.data.errorNum) {
                     dispatch(matchDetailsFetchedAction(response.data));
-                }
-                else {
+                } else {
                     toast(getMessage('error', 'Error in database!'), {
                         position: toast.POSITION.TOP_CENTER,
                         className: getClasses('error')

@@ -43,7 +43,7 @@ export default function matchesReducer(
 
         case MATCH_DETAILS_ERROR_FETCH:
             newState = objectAssign({}, state);
-            newState.error = action.payload;
+            newState.error = action.error;
             newState.isFetching = false;
             return newState;
 

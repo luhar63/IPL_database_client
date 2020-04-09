@@ -45,7 +45,7 @@ class Matches extends Component {
         const { fakeLoader } = this.state;
         let matches = [];
         let teamMeta = {};
-        if (!isFetching && data && selectedSeason) {
+        if (!isFetching && data && data.matches && selectedSeason) {
             matches = data.matches[selectedSeason.value];
             teamMeta = data.meta.teams;
         }
