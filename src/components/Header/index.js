@@ -44,6 +44,9 @@ class Header extends Component {
                     <Link to="/teams" className={`nav-link ${ (match.url==='/teams')? 'active' : ''}` }>
                         Teams
                     </Link>
+                    <Link to="/players" className={`nav-link ${ (match.url==='/players')? 'active' : ''}` }>
+                        Players
+                    </Link>
                     <Link to="/versus" className={`nav-link ${ (match.url==='/versus')? 'active' : ''}` }>
                         Versus
                     </Link>
