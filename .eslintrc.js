@@ -37,7 +37,10 @@ module.exports = {
                 CallExpression: { arguments: 1 },
                 FunctionExpression: { body: 1, parameters: 2 },
                 flatTernaryExpressions: true,
-                ignoredNodes: ['ConditionalExpression > CallExpression']
+                ignoredNodes: [
+                    'ConditionalExpression > CallExpression',
+                    'TemplateLiteral > *'
+                ]
             }
         ],
         'no-unused-vars': ['error', { args: 'none' }],
