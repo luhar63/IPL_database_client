@@ -6,5 +6,6 @@ export const matches = `${apiDomain}/matches`;
 export const stats = `${apiDomain}/stats`;
 export const seasons = `${apiDomain}/seasons`;
 export const match = `${apiDomain}/match`;
+export const player = `${apiDomain}/player`;
 export const players = `${apiDomain}/players`;
 export const register = 'https://reqres.in/api/register';

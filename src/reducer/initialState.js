@@ -5,5 +5,6 @@ export default {
     teams: {},
     matches: {},
     players: {},
-    matchdetails: {}
+    matchdetails: {},
+    playerdetails: {}
 };

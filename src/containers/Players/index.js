@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import Header from 'Components/Header';
 import Loader from 'Components/Loader';
 import TeamSelect from 'Components/TeamSelect';
@@ -14,7 +15,6 @@ import ErrorContainer from '../../components/ErrorContainer';
 
 class Players extends Component {
     state = {
-        
         fakeLoader: false
     };
 
@@ -40,7 +40,7 @@ class Players extends Component {
             players: { isFetching, error, data },
             match
         } = this.props;
-        const { selectedTeam, defaultTeamValue, fakeLoader } = this.state;
+        const { selectedTeam, fakeLoader } = this.state;
         let players = [];
         if (!isFetching && data && selectedTeam) {
             players = data[selectedTeam.value];
@@ -54,7 +54,7 @@ class Players extends Component {
                 </Helmet>
                 <Header match={match} />
                 <div className="players-wrapper">
-                    
+
                     <div className="dropdown-wrapper">
                         <TeamSelect
                             value={selectedTeam}
@@ -73,14 +73,19 @@ class Players extends Component {
                         {data &&
                             players &&
                             players.map(player => (
-                                <div
-                                    className="player"
-                                    key={`player#${player.id}`}
-                                    id={`player#${player.id}`}
+                                <Link
+                                    to={`/player/${player.player_id}`}
+                                    key={`player#${player.player_id}`}
                                 >
-                                    <div className={`team-sprite small team-${player.team_id}`}></div>
-                                    {player.name}
-                                </div>
+                                    <div
+                                        className="player"
+                                        key={`player#${player.player_id}`}
+                                        id={`player#${player.player_id}`}
+                                    >
+                                        <div className={`team-sprite small team-${player.team_id}`}></div>
+                                        {player.player_name}
+                                    </div>
+                                </Link>
                             ))}
                     </div>
                 </div>
