@@ -12,14 +12,14 @@ import './style.scss';
 
 class Player extends Component {
     componentDidMount() {
-        const { fetchplayerdetails, player } = this.props;
-        fetchplayerdetails(player.params.id);
+        const { fetchplayerdetails, match } = this.props;
+        fetchplayerdetails(match.params.playerid);
     }
 
     render() {
         const {
             playerdetails: { isFetching, error, data },
-            player
+            match
         } = this.props;
 
         console.log(data);
@@ -32,7 +32,7 @@ class Player extends Component {
                         <meta charSet="utf-8" />
                         <title>{`${detail.TEAM_1_NAME} vs ${detail.TEAM_2_NAME}`}</title>
                     </Helmet>
-                    <Header player={player} />
+                    <Header match={match} />
                     <div className="player-header">{`Season ${detail.SEASON_ID}: ${detail.TEAM_1_NAME} vs ${detail.TEAM_2_NAME}`}</div>
                     <div className="result">{`${detail.PLAYER_WINNNER_NAME} won by ${detail.WIN_MARGIN} ${detail.WIN_TYPE}`}</div>
                     <div className="scoreboard">
@@ -185,7 +185,10 @@ class Player extends Component {
                                     <tr>
                                         <td>Date</td>
                                         <td>
-                                            {detail.PLAYER_DATE.substring(0, 10)}
+                                            {detail.PLAYER_DATE.substring(
+                                                0,
+                                                10
+                                            )}
                                         </td>
                                     </tr>
                                     <tr>
@@ -230,7 +233,7 @@ class Player extends Component {
                         <meta charSet="utf-8" />
                         <title>Loading</title>
                     </Helmet>
-                    <Header player={player} />
+                    <Header match={match} />
                     <ErrorContainer errorMessage={error} />
                 </div>
             );
@@ -241,7 +244,7 @@ class Player extends Component {
                     <meta charSet="utf-8" />
                     <title>Loading</title>
                 </Helmet>
-                <Header player={player} />
+                <Header match={match} />
                 <Loader />
             </div>
         );
@@ -250,9 +253,8 @@ class Player extends Component {
 
 Player.propTypes = {
     playerdetails: PropTypes.instanceOf(Object).isRequired,
-
-    fetchplayerdetails: PropTypes.func.isRequired,
-    player: PropTypes.instanceOf(Object).isRequired
+    match: PropTypes.instanceOf(Object).isRequired,
+    fetchplayerdetails: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({ playerdetails: state.playerdetails });
