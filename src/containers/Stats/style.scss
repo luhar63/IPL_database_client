@@ -56,6 +56,13 @@
             .active {
                 background-color: #ebf99454;
             }
+            td > a {
+                color: $primary-color;
+                font-weight: bold;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
     }
 }

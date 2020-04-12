@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import Header from 'Components/Header';
 import Loader from 'Components/Loader';
 import SeasonSelect from 'Components/SeasonSelect';
@@ -155,6 +156,48 @@ class Stats extends Component {
                                             Inns
                                         </th>
                                     );
+                                case 'TEAM_AGAINST_NAME':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Against team"
+                                        >
+                                            Against team
+                                        </th>
+                                    );
+                                case 'MATCH_DATE':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="match date"
+                                        >
+                                            Match Date
+                                        </th>
+                                    );
+                                case 'BALLS':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Balls"
+                                        >
+                                            Balls
+                                        </th>
+                                    );
                                 case 'RUNS':
                                     return (
                                         <th
@@ -304,7 +347,11 @@ class Stats extends Component {
                 <tbody>
                     {renderData.map((item, i) => {
                         return (
-                            <tr key={`rank-${item.PLAYER_ID}`}>
+                            <tr
+                                key={`rank-${item.PLAYER_ID}${
+                                    item.MATCH_ID ? `-${item.MATCH_ID}` : ''
+                                }`}
+                            >
                                 <th>{i + 1}</th>
                                 {header.map(head => {
                                     switch (head) {
@@ -318,7 +365,11 @@ class Stats extends Component {
                                                             : ''
                                                     }
                                                 >
-                                                    {item.PLAYER_NAME}
+                                                    <Link
+                                                        to={`/player/${item.PLAYER_ID}`}
+                                                    >
+                                                        {item.PLAYER_NAME}
+                                                    </Link>
                                                 </td>
                                             );
                                         case 'MATCHES':
@@ -345,6 +396,51 @@ class Stats extends Component {
                                                     }
                                                 >
                                                     {item.INNINGS}
+                                                </td>
+                                            );
+                                        case 'TEAM_AGAINST_NAME':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    <Link
+                                                        to={`/team/${item.TEAM_AGAINST}`}
+                                                    >
+                                                        {item.TEAM_AGAINST_NAME}
+                                                    </Link>
+                                                </td>
+                                            );
+                                        case 'MATCH_DATE':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {new Date(
+                                                        item.MATCH_DATE
+                                                    ).toDateString()}
+                                                </td>
+                                            );
+                                        case 'BALLS':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.BALLS}
                                                 </td>
                                             );
                                         case 'RUNS':
