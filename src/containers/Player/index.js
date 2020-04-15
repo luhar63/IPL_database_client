@@ -46,11 +46,13 @@ class Player extends Component {
                 </Helmet>
                 <Header match={match} />
 
-
-                <div className="player-header">
-                    <div className={`team-sprite small team-${playerdetails.team_id}`}></div>
-                    <h1 id="player-name">{`${playerdetails.player_name}`}</h1>
-                </div>
+                {data &&
+                    playerdetails &&
+                    <div className="player-header">
+                        <div className={`team-sprite small team-${playerdetails.team_id}`}></div>
+                        <h1 id="player-name">{`${playerdetails.player_name}`}</h1>
+                    </div>
+                }
 
                 <div>
 
@@ -61,8 +63,8 @@ class Player extends Component {
                             playerdetails &&
                             playerdetails.stats.map(stats => (
                                 <div
-                                    key={`player#${player.player_id}`}
-                                    id={`player#${player.player_id}`}
+                                    key={`player#${playerdetails.player_id}`}
+                                    id={`player#${playerdetails.player_id}`}
                                 >
                                     <div className="score">
                                         <span>{`Player Details`}</span>{' '}
@@ -148,8 +150,8 @@ class Player extends Component {
                                         </tbody>
                                     </Table>
                                     <div
-                                        key={`player#${player.player_id}`}
-                                        id={`player#${player.player_id}`}
+                                        key={`player#${playerdetails.player_id}`}
+                                        id={`player#${playerdetails.player_id}`}
                                     >
                                         <div className="score">
                                             <span>{`Seasonwise Stats`}</span>{' '}
@@ -212,19 +214,6 @@ class Player extends Component {
                                 </div>
                             ))}
                     </div>
-
-                    {/* <div className="playerdetails-wrapper">
-                        {(isFetching) && <Loader />}
-                        {error && <ErrorContainer errorMessage={error} />}
-                        {data &&
-                            playerdetails &&
-                            playerdetails.seasonStats &&
-                            Object.keys(playerdetails.seasonStats).map(season => (
-                                playerdetails.seasonStats[season].map(stats =>
-                                    a
-                                )
-                            ))}
-                    </div> */}
                 </div>
             </div>
         );
