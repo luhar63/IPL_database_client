@@ -9,6 +9,8 @@ import Matches from 'Containers/Matches/Loadable';
 import Match from 'Containers/Match';
 import Page404 from 'Containers/Page404/Loadable';
 import Teams from 'Containers/Teams/Loadable';
+import Players from 'Containers/Players/Loadable';
+import Player from 'Containers/Player';
 import Stats from 'Containers/Stats/Loadable';
 import ToastClose from 'Components/ToastClose';
 
@@ -48,8 +50,18 @@ class Root extends Component {
                   />
                   <Route
                       exact
+                      path="/player/:playerid"
+                      render={props => <Player {...props} />}
+                  />
+                  <Route
+                      exact
                       path="/teams"
                       render={props => <Teams {...props} />}
+                  />
+                  <Route
+                      exact
+                      path="/players"
+                      render={props => <Players {...props} />}
                   />
                   <Route
                       exact
