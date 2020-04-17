@@ -1,9 +1,9 @@
 import objectAssign from 'object-assign';
 import {
-    MATCHES_FETCH,
-    MATCHES_FETCHING,
-    MATCHES_FETCHED,
-    MATCHES_ERROR_FETCH,
+    VERSUS_FETCH,
+    VERSUS_FETCHING,
+    VERSUS_FETCHED,
+    VERSUS_ERROR_FETCH,
     UPDATE_SELECTED_SEASON
 } from './constant';
 
@@ -18,7 +18,7 @@ export default function versusReducer(state = initialState.teams, action) {
     let newState;
 
     switch (action.type) {
-        case MATCHES_FETCH:
+        case VERSUS_FETCH:
             // For this example, just simulating a save by changing date modified.
             // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
             return objectAssign({}, state, {
@@ -27,20 +27,20 @@ export default function versusReducer(state = initialState.teams, action) {
                 data: null,
                 selectedSeason: null
             });
-        case MATCHES_FETCHING:
+        case VERSUS_FETCHING:
             return objectAssign({}, state, {
                 isFetching: true,
                 error: null,
                 data: null
             });
 
-        case MATCHES_FETCHED:
+        case VERSUS_FETCHED:
             newState = objectAssign({}, state);
             newState.data = action.payload;
             newState.isFetching = false;
             return newState;
 
-        case MATCHES_ERROR_FETCH:
+        case VERSUS_ERROR_FETCH:
             newState = objectAssign({}, state);
             newState.error = action.error;
             newState.isFetching = false;
