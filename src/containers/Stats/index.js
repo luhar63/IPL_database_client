@@ -86,7 +86,7 @@ class Stats extends Component {
                                 type="button"
                                 className={`link-button filter-anchor ${
                                     item === activeFilter.filter ? 'active' : ''
-                                }`}
+                                    }`}
                                 onClick={e => {
                                     e.stopPropagation();
                                     this.filterSelect(type, item);
@@ -98,6 +98,368 @@ class Stats extends Component {
                     );
                 })}
             </ul>
+        );
+    };
+
+    renderBowlingTable = (header, renderData) => {
+        const {
+            statsMisc: { activeFilter },
+            statsFilters: { data }
+        } = this.props;
+        const activeVal = data[activeFilter.type][activeFilter.filter].active;
+        return (
+            <Table striped bordered size="sm">
+                <thead>
+                    <tr>
+                        <th title="Rank">Rank</th>
+                        {header.map(item => {
+                            switch (item) {
+                                case 'BOWLER_NAME':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Player Name"
+                                        >
+                                            Player
+                                        </th>
+                                    );
+                                case 'MATCHES':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Matches"
+                                        >
+                                            Mat
+                                        </th>
+                                    );
+                                case 'INNINGS':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Innings"
+                                        >
+                                            Inns
+                                        </th>
+                                    );
+                                case 'RUNS':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Runs"
+                                        >
+                                            Runs
+                                        </th>
+                                    );
+                                case 'AVG':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Average"
+                                        >
+                                            Avg
+                                        </th>
+                                    );
+                                case 'DOT_BALLS':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Dots balls"
+                                        >
+                                            Dots
+                                        </th>
+                                    );
+                                case 'SR':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Strike rate"
+                                        >
+                                            SR
+                                        </th>
+                                    );
+                                case 'HATTRICKS':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Hat Tricks"
+                                        >
+                                            HT
+                                        </th>
+                                    );
+                                case 'OVERS':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Overs"
+                                        >
+                                            Ov
+                                        </th>
+                                    );
+                                case 'ECO':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Economy"
+                                        >
+                                            Eco
+                                        </th>
+                                    );
+                                case 'MAIDEN':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Maiden overs"
+                                        >
+                                            Maid
+                                        </th>
+                                    );
+                                case 'WICKETS':
+                                    return (
+                                        <th
+                                            key={item}
+                                            className={
+                                                activeVal === item
+                                                    ? 'active'
+                                                    : ''
+                                            }
+                                            title="Wickets"
+                                        >
+                                            Wkts
+                                        </th>
+                                    );
+                                default:
+                                    return null;
+                            }
+                        })}
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderData.map((item, i) => {
+                        return (
+                            <tr key={`rank-${item.BOWLER_ID}`}>
+                                <th>{i + 1}</th>
+                                {header.map(head => {
+                                    switch (head) {
+                                        case 'BOWLER_NAME':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.BOWLER_NAME}
+                                                </td>
+                                            );
+                                        case 'MATCHES':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.MATCHES}
+                                                </td>
+                                            );
+                                        case 'INNINGS':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.INNINGS}
+                                                </td>
+                                            );
+                                        case 'RUNS':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.RUNS}
+                                                </td>
+                                            );
+                                        case 'AVG':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.AVG == null ? "N/A" : item.AVG.toFixed(2)}
+                                                </td>
+                                            );
+                                        case 'OVERS':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.OVERS}
+                                                </td>
+                                            );
+                                        case 'HATTRICKS':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.HATTRICKS}
+                                                </td>
+                                            );
+                                        case 'SR':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.SR == null ? "N/A" : item.SR.toFixed(2)}
+                                                </td>
+                                            );
+                                        case 'WICKETS':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.WICKETS == null ? 0 : item.WICKETS}
+                                                </td>
+                                            );
+                                        case 'MAIDEN':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.MAIDEN}
+                                                </td>
+                                            );
+                                        case 'DOT_BALLS':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.DOT_BALLS}
+                                                </td>
+                                            );
+                                        case 'ECO':
+                                            return (
+                                                <td
+                                                    key={head}
+                                                    className={
+                                                        activeVal === head
+                                                            ? 'active'
+                                                            : ''
+                                                    }
+                                                >
+                                                    {item.ECO.toFixed(2)}
+                                                </td>
+                                            );
+                                        default:
+                                            return null;
+                                    }
+                                })}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </Table>
         );
     };
 
@@ -350,7 +712,7 @@ class Stats extends Component {
                             <tr
                                 key={`rank-${item.PLAYER_ID}${
                                     item.MATCH_ID ? `-${item.MATCH_ID}` : ''
-                                }`}
+                                    }`}
                             >
                                 <th>{i + 1}</th>
                                 {header.map(head => {
@@ -662,6 +1024,10 @@ class Stats extends Component {
                                 data &&
                                 activeFilter.type === 'batting' &&
                                 this.renderBattingTable(firstRow, data)}
+                            {!statsDetail.error &&
+                                data &&
+                                activeFilter.type === 'bowling' &&
+                                this.renderBowlingTable(firstRow, data)}
                         </div>
                     </div>
                 </div>
