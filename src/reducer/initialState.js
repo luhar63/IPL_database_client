@@ -1,12 +1,15 @@
 export default {
     season: {},
+    team: {},
     home: {},
     teams: {},
     matches: {},
-    matchdetails: {},
     stats: {
         statsDetail: {},
         statsFilters: {},
         statsMisc: {}
-    }
+    },
+    players: {},
+    matchdetails: {},
+    playerdetails: {}
 };
