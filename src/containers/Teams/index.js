@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import Header from 'Components/Header';
 import Loader from 'Components/Loader';
+import { Link } from 'react-router-dom';
 import SeasonSelect from 'Components/SeasonSelect';
 // import { Form, Button } from 'react-bootstrap';
 import { fetchTeams } from 'Containers/Teams/calls';
@@ -69,6 +70,10 @@ class Teams extends Component {
                       {data &&
               teams &&
               teams.map(team => (
+                <Link
+                to={`/team/${team.id}`}
+                key={`team/${team.id}`}
+                >   
                   <div
                       className="team"
                       key={`team#${team.id}`}
@@ -77,8 +82,10 @@ class Teams extends Component {
                       <div className={`team-sprite small team-${team.id}`}></div>
                       {team.name}
                   </div>
+                </Link>
               ))}
                   </div>
+
               </div>
           </div>
       );

@@ -3,5 +3,7 @@ export default {
     home: {},
     teams: {},
     matches: {},
-    matchdetails: {}
+    matchdetails: {},
+    team: {},
+    teamdetails: {}
 };
