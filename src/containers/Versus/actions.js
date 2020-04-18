@@ -6,26 +6,26 @@ import {
     UPDATE_SELECTED_SEASON
 } from './constant';
 
-export function matchesFetchAction() {
+export function versusFetchAction() {
     return {
         type: VERSUS_FETCH
     };
 }
 
-export function matchesFetchingAction() {
+export function versusFetchingAction() {
     return {
         type: VERSUS_FETCHING
     };
 }
 
-export function matchesFetchedAction(payload) {
+export function versusFetchedAction(payload) {
     return {
         type: VERSUS_FETCHED,
         payload
     };
 }
 
-export function matchesErrorFetchAction(error) {
+export function versusErrorFetchAction(error) {
     return {
         type: VERSUS_ERROR_FETCH,
         error

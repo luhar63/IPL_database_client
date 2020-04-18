@@ -3,16 +3,16 @@ import { matches } from 'Constants/api';
 import { toast } from 'react-toastify';
 import { getMessage, getClasses } from 'Constants/app';
 import {
-    matchesFetchAction,
-    matchesFetchingAction,
-    matchesFetchedAction,
-    matchesErrorFetchAction,
+    versusFetchAction,
+    versusFetchingAction,
+    versusFetchedAction,
+    versusErrorFetchAction,
     updateSelectedSeasonAction
 } from './actions';
 
-export function matchesReset() {
+export function versusReset() {
     return dispatch => {
-        dispatch(matchesFetchAction);
+        dispatch(versusFetchAction);
     };
 }
 export function updateSelectedSeason(selectedSeason) {
@@ -23,12 +23,12 @@ export function updateSelectedSeason(selectedSeason) {
 
 export function fetchMatches() {
     return dispatch => {
-        dispatch(matchesFetchingAction());
+        dispatch(versusFetchingAction());
         axios
             .get(matches)
             .then(response => {
                 if (!response.data.errorNum) {
-                    dispatch(matchesFetchedAction(response.data));
+                    dispatch(versusFetchedAction(response.data));
                 } else {
                     toast(getMessage('error', 'Error in database!'), {
                         position: toast.POSITION.TOP_CENTER,
@@ -42,8 +42,8 @@ export function fetchMatches() {
                 // });
             })
             .catch(error => {
-                dispatch(matchesErrorFetchAction(error));
-                toast(getMessage('error', 'Error in fetching matches!'), {
+                dispatch(versusErrorFetchAction(error));
+                toast(getMessage('error', 'Error in fetching!'), {
                     position: toast.POSITION.TOP_CENTER,
                     className: getClasses('error')
                 });

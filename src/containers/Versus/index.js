@@ -6,15 +6,15 @@ import PropTypes from 'prop-types';
 import Header from 'Components/Header';
 import Loader from 'Components/Loader';
 import SeasonSelect from 'Components/SeasonSelect';
-// import { Form, Button } from 'react-bootstrap';
+import { Tabs, Tab } from 'react-bootstrap';
 import { fetchMatches, updateSelectedSeason } from 'Containers/Matches/calls';
 import './style.scss';
 import ErrorContainer from '../../components/ErrorContainer';
 
 class Versus extends Component {
-    state = {
-        fakeLoader: false
-    };
+    // state = {
+    //     fakeLoader: false
+    // };
 
     componentDidMount() {
         const { fetchmatches, matches } = this.props;
@@ -24,15 +24,15 @@ class Versus extends Component {
     }
 
     changeSelect = selectedSeason => {
-        this.setState({
-            fakeLoader: true
-        });
+        // this.setState({
+        //     fakeLoader: true
+        // });
         const { updateselectedseason } = this.props;
 
         setTimeout(() => {
-            this.setState({
-                fakeLoader: false
-            });
+            // this.setState({
+            //     fakeLoader: false
+            // });
             updateselectedseason(selectedSeason);
         }, 1000);
     };
@@ -42,7 +42,7 @@ class Versus extends Component {
             matches: { isFetching, error, data, selectedSeason },
             match
         } = this.props;
-        const { fakeLoader } = this.state;
+        // const { fakeLoader } = this.state;
         let matches = [];
         let teamMeta = {};
         if (!isFetching && data && data.matches && selectedSeason) {
@@ -58,7 +58,7 @@ class Versus extends Component {
                 </Helmet>
                 <Header match={match} />
                 <div className="matches-wrapper">
-                    <div className="dropdown-wrapper">
+                    {/* <div className="dropdown-wrapper">
                         <SeasonSelect
                             value={selectedSeason}
                             className="season-dropdown"
@@ -69,61 +69,23 @@ class Versus extends Component {
                                 Select a season to see match list
                             </span>
                         )}
-                    </div>
+                    </div> */}
                     <div className="match-list-wrapper">
-                        {(isFetching || fakeLoader) && <Loader />}
+                        {(isFetching) && <Loader />}
                         {error && <ErrorContainer errorMessage={error} />}
-                        {data &&
-                            matches &&
-                            matches.map(item => (
-                                <Link
-                                    to={`/match/${item.id}`}
-                                    key={`team#${item.id}`}
-                                >
-                                    <div
-                                        className="match"
-                                        id={`match#${item.id}`}
-                                    >
-                                        <div
-                                            className={`match-team-1 ${
-                                                item.team_winner_id ===
-                                                item.team_1_id
-                                                    ? 'winner'
-                                                    : 'loser'
-                                            }`}
-                                        >
-                                            <div
-                                                className={`team-sprite small team-${item.team_1_id}`}
-                                            ></div>
-                                            {teamMeta[item.team_1_id]}
-                                        </div>
-                                        <div className="vs-details">
-                                            <div className="vs"></div>
-                                            <div>
-                                                {new Date(
-                                                    item.match_date
-                                                ).toDateString()}
-                                            </div>
-                                            <div>
-                                                {item.venue}, {item.city}
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={`match-team-2 ${
-                                                item.team_winner_id ===
-                                                item.team_2_id
-                                                    ? 'winner'
-                                                    : 'loser'
-                                            }`}
-                                        >
-                                            <div
-                                                className={`team-sprite small team-${item.team_2_id}`}
-                                            ></div>
-                                            {teamMeta[item.team_2_id]}
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
+                        {data && matches && (
+                            <Tabs
+                                defaultActiveKey={`team#${detail.innings[0].batting[0].TEAM_BATTING_NAME}`}
+                            >
+                                <Tab>
+
+                                </Tab>
+                                <Tab>
+
+                                </Tab>
+                            </Tabs>
+                        )
+                        }
                     </div>
                 </div>
             </div>

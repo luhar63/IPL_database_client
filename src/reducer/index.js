@@ -9,6 +9,7 @@ import playerdetails from 'Containers/Player/reducer';
 import { connectRouter } from 'connected-react-router';
 import season from './season';
 import team from './team';
+import selectPlayer from './player';
 // import { history } from '../store/configureStore';
 
 export default history =>
@@ -22,5 +23,6 @@ export default history =>
         stats,
         matchdetails,
         playerdetails,
+        selectPlayer,
         router: connectRouter(history)
     });

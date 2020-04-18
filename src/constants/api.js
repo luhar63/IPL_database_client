@@ -1,5 +1,6 @@
 const apiDomain = 'http://localhost:3000/api';
 export const teams = `${apiDomain}/teams`;
+export const allPlayers = `${apiDomain}/allPlayers`;
 export const teamsPerSeason = `${apiDomain}/teamsPerSeason`;
 export const playersPerTeam = `${apiDomain}/playersPerTeam`;
 export const matches = `${apiDomain}/matches`;
