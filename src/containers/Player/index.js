@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
-import { Table, Tabs, Tab } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import { fetchPlayerDetails } from 'Containers/Player/calls';
 import Header from 'Components/Header';
@@ -24,6 +24,7 @@ class Player extends Component {
         let playerdetails = [];
 
         if (!isFetching && data) {
+            // eslint-disable-next-line prefer-destructuring
             playerdetails = data.playerdetails;
         }
 
@@ -67,7 +68,7 @@ class Player extends Component {
                                     id={`player#${playerdetails.player_id}`}
                                 >
                                     <div className="score">
-                                        <span>{`Player Details`}</span>{' '}
+                                        <span>Player Details</span>{' '}
                                     </div>
 
                                     <Table striped bordered size="sm">
@@ -107,7 +108,7 @@ class Player extends Component {
                                     </Table>
 
                                     <div className="score">
-                                        <span>{`Player Stats`}</span>{' '}
+                                        <span>Player Stats</span>{' '}
                                     </div>
 
                                     <Table striped bordered size="sm">
@@ -154,7 +155,7 @@ class Player extends Component {
                                         id={`player#${playerdetails.player_id}`}
                                     >
                                         <div className="score">
-                                            <span>{`Seasonwise Stats`}</span>{' '}
+                                            <span>Seasonwise Stats</span>{' '}
                                         </div>
 
 
@@ -179,31 +180,31 @@ class Player extends Component {
                                                     playerdetails &&
                                                     playerdetails.seasonStats &&
                                                     Object.keys(playerdetails.seasonStats).map(season => (
-                                                        playerdetails.seasonStats[season].map(stats =>
+                                                        playerdetails.seasonStats[season].map(bstats =>
                                                             <tr key={`#id-player-${playerdetails.player_id}`}>
                                                                 <td>
                                                                     {season}
                                                                 </td>
                                                                 <td>
-                                                                    {stats.matches_played}
+                                                                    {bstats.matches_played}
                                                                 </td>
                                                                 <td>
-                                                                    {stats.balls_faced}
+                                                                    {bstats.balls_faced}
                                                                 </td>
                                                                 <td>
-                                                                    {stats.total_runs}
+                                                                    {bstats.total_runs}
                                                                 </td>
                                                                 <td>
-                                                                    {stats.fours}
+                                                                    {bstats.fours}
                                                                 </td>
                                                                 <td>
-                                                                    {stats.sixes}
+                                                                    {bstats.sixes}
                                                                 </td>
                                                                 <td>
-                                                                    {stats.balls_bowled}
+                                                                    {bstats.balls_bowled}
                                                                 </td>
                                                                 <td>
-                                                                    {stats.total_wickets}
+                                                                    {bstats.total_wickets}
                                                                 </td>
                                                             </tr>
                                                         )
