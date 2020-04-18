@@ -11,5 +11,6 @@ export default {
     },
     players: {},
     matchdetails: {},
-    playerdetails: {}
+    playerdetails: {},
+    selectPlayer: {}
 };

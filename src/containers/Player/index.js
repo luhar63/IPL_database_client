@@ -34,19 +34,19 @@ class Player extends Component {
             playerdetails = data.playerdetails;
         }
 
-        let seasonList = [];
-        let runsList = [];
-        let wicketsList = [];
-        let ballsFacedList = [];
-        let foursList = [];
-        let sixesList = [];
-        let ballsBowledList = [];
+        const seasonList = [];
+        const runsList = [];
+        const wicketsList = [];
+        const ballsFacedList = [];
+        const foursList = [];
+        const sixesList = [];
+        const ballsBowledList = [];
 
-        data &&
+        if (data &&
             playerdetails &&
-            playerdetails.seasonStats &&
-            Object.keys(playerdetails.seasonStats).map(season => (
-                seasonList.push("Season " + season),
+            playerdetails.seasonStats) {
+            Object.keys(playerdetails.seasonStats).map(season => {
+                seasonList.push(`Season ${season}`);
                 playerdetails.seasonStats[season].map(sstats =>
                     runsList.push(sstats.total_runs) &&
                     wicketsList.push(sstats.total_wickets) &&
@@ -55,8 +55,11 @@ class Player extends Component {
                     ballsFacedList.push(sstats.balls_faced) &&
                     ballsBowledList.push(sstats.balls_bowled)
                 )
+                return null;
+            }
             )
-            )
+        }
+
 
         const runsData = {
             labels: seasonList,
