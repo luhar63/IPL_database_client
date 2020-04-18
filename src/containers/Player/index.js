@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
-
+import { Line } from 'react-chartjs-2';
 import { fetchPlayerDetails } from 'Containers/Player/calls';
 import Header from 'Components/Header';
 import Loader from 'Components/Loader';
@@ -11,6 +11,12 @@ import ErrorContainer from '../../components/ErrorContainer';
 import './style.scss';
 
 class Player extends Component {
+
+    constructor(props) {
+        super(props);
+        this.chartReference = React.createRef();
+    }
+
     componentDidMount() {
         const { fetchplayerdetails, match } = this.props;
         fetchplayerdetails(match.params.playerid);
@@ -28,19 +34,176 @@ class Player extends Component {
             playerdetails = data.playerdetails;
         }
 
-        // if (data &&
-        //     playerdetails) {
-        //     for (let season in playerdetails.seasonStats) {
-        //         console.log(playerdetails.seasonStats[season][0]);
-        //     }
-        //     // playerdetails.seasonStats['1'].map(stats =>
+        let seasonList = [];
+        let runsList = [];
+        let wicketsList = [];
+        let ballsFacedList = [];
+        let foursList = [];
+        let sixesList = [];
+        let ballsBowledList = [];
 
-        //     // );
-        // }
+        data &&
+            playerdetails &&
+            playerdetails.seasonStats &&
+            Object.keys(playerdetails.seasonStats).map(season => (
+                seasonList.push("Season " + season),
+                playerdetails.seasonStats[season].map(sstats =>
+                    runsList.push(sstats.total_runs) &&
+                    wicketsList.push(sstats.total_wickets) &&
+                    foursList.push(sstats.fours) &&
+                    sixesList.push(sstats.sixes) &&
+                    ballsFacedList.push(sstats.balls_faced) &&
+                    ballsBowledList.push(sstats.balls_bowled)
+                )
+            )
+            )
 
+        const runsData = {
+            labels: seasonList,
+            datasets: [
+                {
+                    label: 'total runs',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: '#4a148c',
+                    borderColor: '#4a148c',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: '#4a148c',
+                    pointBackgroundColor: '#4a148c',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#4a148c',
+                    pointHoverBorderColor: '#4a148c',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: runsList
+                },
+                {
+                    label: 'balls faced',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: '#d50000',
+                    borderColor: '#d50000',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: '#d50000',
+                    pointBackgroundColor: '#d50000',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#d50000',
+                    pointHoverBorderColor: '#d50000',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: ballsFacedList
+                }
+            ]
+        };
+
+        const boundariesData = {
+            labels: seasonList,
+            datasets: [
+                {
+                    label: 'fours',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: '#64dd17',
+                    borderColor: '#64dd17',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: '#64dd17',
+                    pointBackgroundColor: '#64dd17',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#64dd17',
+                    pointHoverBorderColor: '#64dd17',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: foursList
+                },
+                {
+                    label: 'sixes',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: '#000000',
+                    borderColor: '#000000',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: '#000000',
+                    pointBackgroundColor: '#000000',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#000000',
+                    pointHoverBorderColor: '#000000',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: sixesList
+                }
+            ]
+        };
+
+        const ballsData = {
+            labels: seasonList,
+            datasets: [
+                {
+                    label: 'total wickets',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: '#4a148c',
+                    borderColor: '#4a148c',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: '#4a148c',
+                    pointBackgroundColor: '#4a148c',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#4a148c',
+                    pointHoverBorderColor: '#4a148c',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: wicketsList
+                },
+                {
+                    label: 'balls bowled',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: '#d50000',
+                    borderColor: '#d50000',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: '#d50000',
+                    pointBackgroundColor: '#d50000',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: '#d50000',
+                    pointHoverBorderColor: '#d50000',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: ballsBowledList
+                }
+            ]
+        };
 
         return (
-            <div id="player">
+            <div id="player" >
                 <Helmet>
                     <meta charSet="utf-8" />
                     <title>Player</title>
@@ -212,11 +375,27 @@ class Player extends Component {
                                             </tbody>
                                         </Table>
                                     </div>
+                                    <br />
+                                    <div>
+                                        <div className="score">
+                                            <span>Batting performance charts</span>{' '}
+                                        </div> <br />
+                                        <h4>Runs</h4>
+                                        <Line data={runsData} /><br />
+                                        <h4>Boundaries</h4>
+                                        <Line data={boundariesData} /><br />
+                                    </div>
+                                    <div>
+                                        <div className="score">
+                                            <span>Bowling performance chart</span>{' '}
+                                        </div>
+                                        <Line data={ballsData} /><br /><br /><br />
+                                    </div>
                                 </div>
                             ))}
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }
