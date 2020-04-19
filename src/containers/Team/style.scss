@@ -10,6 +10,14 @@
     min-height: 300px;
 }
 
+.team-list-wrapper {
+    max-height: 500px;
+    max-width: fit-content;
+    overflow: scroll;
+    border: thin;
+    border-style: solid;
+}
+
 .match-header {
     display: flex;
     justify-content: center;
@@ -18,6 +26,16 @@
     font-size: 1.4rem;
     color: #505043;
 }
+
+.team-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto 0;
+    font-size: 1.4rem;
+    color: #505043;
+}
+
 .result {
     display: flex;
     justify-content: center;
