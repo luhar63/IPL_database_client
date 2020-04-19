@@ -1,0 +1,73 @@
+@import '../../assets/css/variable.scss';
+.form-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+}
+.match-details-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    min-height: 300px;
+}
+
+.team-list-wrapper {
+    max-height: 500px;
+    max-width: fit-content;
+    overflow: scroll;
+    border: thin;
+    border-style: solid;
+}
+
+.match-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto 0;
+    font-size: 1.4rem;
+    color: #505043;
+}
+
+.team-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto 0;
+    font-size: 1.4rem;
+    color: #505043;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto 0;
+    font-size: 1.2rem;
+    color: #d83b3b;
+}
+
+.match-info {
+    margin-top: 30px;
+    .table-bordered td,
+    .table-bordered th {
+        border-top: none;
+        border-bottom: none;
+    }
+}
+.scoreboard {
+    max-width: 960px;
+    margin: 20px auto;
+    .tab-content {
+        padding: 10px;
+    }
+    .nav-link {
+        color: #536b69;
+    }
+}
+#team-scoreboard {
+    padding: 10px;
+}
+.score {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.8rem;
+}

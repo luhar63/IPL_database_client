@@ -11,6 +11,7 @@ import Page404 from 'Containers/Page404/Loadable';
 import Teams from 'Containers/Teams/Loadable';
 import Players from 'Containers/Players/Loadable';
 import Player from 'Containers/Player';
+import Team from 'Containers/Team/Loadable';
 import Stats from 'Containers/Stats/Loadable';
 import Versus from 'Containers/Versus/Loadable';
 import ToastClose from 'Components/ToastClose';
@@ -59,6 +60,11 @@ class Root extends Component {
                         exact
                         path="/teams"
                         render={props => <Teams {...props} />}
+                    />
+                    <Route
+                      exact
+                      path="/team/:teamid"
+                      render={props => <Team {...props} />}
                     />
                     <Route
                         exact

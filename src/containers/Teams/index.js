@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import Header from 'Components/Header';
 import Loader from 'Components/Loader';
+import { Link } from 'react-router-dom';
 import SeasonSelect from 'Components/SeasonSelect';
 // import { Form, Button } from 'react-bootstrap';
 import { fetchTeams } from 'Containers/Teams/calls';
@@ -47,42 +48,48 @@ class Teams extends Component {
             teams = data[selectedSeason.value];
         }
 
-        return (
-            <div id="teams">
-                <Helmet>
-                    <meta charSet="utf-8" />
-                    <title>Teams</title>
-                </Helmet>
-                <Header match={match} />
-                <div className="teams-wrapper">
-                    <div className="dropdown-wrapper">
-                        <SeasonSelect
-                            className="season-dropdown"
-                            onChange={this.changeSelect}
-                            showAll
-                            showAllValue={defaultSeasonValue}
-                        />
-                    </div>
-                    <div className="team-list-wrapper">
-                        {(isFetching || fakeLoader) && <Loader />}
-                        {error && <ErrorContainer errorMessage={error} />}
-                        {data &&
-                            teams &&
-                            teams.map(team => (
-                                <div
-                                    className="team"
-                                    key={`team#${team.id}`}
-                                    id={`team#${team.id}`}
-                                >
-                                    <div className={`team-sprite small team-${team.id}`}></div>
-                                    {team.name}
-                                </div>
-                            ))}
-                    </div>
-                </div>
-            </div>
-        );
-    }
+      return (
+          <div id="teams">
+              <Helmet>
+                  <meta charSet="utf-8" />
+                  <title>Teams</title>
+              </Helmet>
+              <Header match={match} />
+              <div className="teams-wrapper">
+                  <div className="dropdown-wrapper">
+                      <SeasonSelect
+                          className="season-dropdown"
+                          onChange={this.changeSelect}
+                          showAll
+                          showAllValue={defaultSeasonValue}
+                      />
+                  </div>
+                  <div className="team-list-wrapper">
+                      {(isFetching || fakeLoader) && <Loader />}
+                      {error && <ErrorContainer errorMessage={error} />}
+                      {data &&
+              teams &&
+              teams.map(team => (
+                <Link
+                to={`/team/${team.id}`}
+                key={`team/${team.id}`}
+                >   
+                  <div
+                      className="team"
+                      key={`team#${team.id}`}
+                      id={`team#${team.id}`}
+                  >
+                      <div className={`team-sprite small team-${team.id}`}></div>
+                      {team.name}
+                  </div>
+                </Link>
+              ))}
+                  </div>
+
+              </div>
+          </div>
+      );
+  }
 }
 Teams.propTypes = {
     // children: PropTypes.element

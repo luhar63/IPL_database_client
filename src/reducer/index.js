@@ -6,6 +6,7 @@ import matches from 'Containers/Matches/reducer';
 import stats from 'Containers/Stats/reducer';
 import matchdetails from 'Containers/Match/reducer';
 import playerdetails from 'Containers/Player/reducer';
+import teamdetails from 'Containers/Team/reducer';
 import { connectRouter } from 'connected-react-router';
 import season from './season';
 import team from './team';
@@ -17,6 +18,7 @@ export default history =>
         home,
         teams,
         players,
+        teamdetails,
         season,
         team,
         matches,
