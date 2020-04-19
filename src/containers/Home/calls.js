@@ -1,38 +1,39 @@
 import axios from 'axios';
-import { seasons } from 'Constants/api';
+import { search } from 'Constants/api';
 import { toast } from 'react-toastify';
 import { getMessage, getClasses } from 'Constants/app';
 import {
-    loginFetchAction,
-    loginFetchingAction,
-    loginFetchedAction,
-    loginErrorFetchAction
+    searchFetchAction,
+    searchFetchingAction,
+    searchFetchedAction,
+    searchErrorFetchAction
 } from './actions';
 
-export function loginReset() {
+export function searchReset() {
     return dispatch => {
-        dispatch(loginFetchAction);
+        dispatch(searchFetchAction);
     };
 }
 
-export function loginFetch(email, password) {
+export function searchFetch(q) {
     return dispatch => {
-        dispatch(loginFetchingAction());
+        dispatch(searchFetchingAction());
         axios
-            .post(seasons, {
-                email,
-                password
+            .get(search, {
+                params: {
+                    q
+                }
             })
             .then(response => {
-                dispatch(loginFetchedAction(response));
-                toast(getMessage('error', 'Successfully logged in!'), {
-                    position: toast.POSITION.TOP_CENTER,
-                    className: getClasses('success')
-                });
+                dispatch(searchFetchedAction(response.data));
+                // toast(getMessage('error', 'Successfully logged in!'), {
+                //     position: toast.POSITION.TOP_CENTER,
+                //     className: getClasses('success')
+                // });
             })
             .catch(error => {
-                dispatch(loginErrorFetchAction(error));
-                toast(getMessage('error', 'Error in login!'), {
+                dispatch(searchErrorFetchAction(error));
+                toast(getMessage('error', 'Error in search!'), {
                     position: toast.POSITION.TOP_CENTER,
                     className: getClasses('error')
                 });

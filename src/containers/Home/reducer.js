@@ -1,9 +1,9 @@
 import objectAssign from 'object-assign';
 import {
-    LOGIN_FETCH,
-    LOGIN_FETCHING,
-    LOGIN_FETCHED,
-    LOGIN_ERROR_FETCH
+    SEARCH_FETCH,
+    SEARCH_FETCHING,
+    SEARCH_FETCHED,
+    SEARCH_ERROR_FETCH
 } from './constant';
 
 import initialState from '../../reducer/initialState';
@@ -17,7 +17,7 @@ export default function loginReducer(state = initialState.home, action) {
     let newState;
 
     switch (action.type) {
-        case LOGIN_FETCH:
+        case SEARCH_FETCH:
             // For this example, just simulating a save by changing date modified.
             // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
             return objectAssign({}, state, {
@@ -25,20 +25,20 @@ export default function loginReducer(state = initialState.home, action) {
                 error: null,
                 data: null
             });
-        case LOGIN_FETCHING:
+        case SEARCH_FETCHING:
             return objectAssign({}, state, {
                 isLoading: true,
                 error: null,
                 data: null
             });
 
-        case LOGIN_FETCHED:
+        case SEARCH_FETCHED:
             newState = objectAssign({}, state);
             newState.data = action.payload;
             newState.isLoading = false;
             return newState;
 
-        case LOGIN_ERROR_FETCH:
+        case SEARCH_ERROR_FETCH:
             newState = objectAssign({}, state);
             newState.error = action.payload;
             newState.isLoading = false;

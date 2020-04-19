@@ -1,32 +1,32 @@
 import {
-    LOGIN_FETCH,
-    LOGIN_FETCHING,
-    LOGIN_FETCHED,
-    LOGIN_ERROR_FETCH
+    SEARCH_FETCH,
+    SEARCH_FETCHING,
+    SEARCH_FETCHED,
+    SEARCH_ERROR_FETCH
 } from './constant';
 
-export function loginFetchAction() {
+export function searchFetchAction() {
     return {
-        type: LOGIN_FETCH
+        type: SEARCH_FETCH
     };
 }
 
-export function loginFetchingAction() {
+export function searchFetchingAction() {
     return {
-        type: LOGIN_FETCHING
+        type: SEARCH_FETCHING
     };
 }
 
-export function loginFetchedAction(payload) {
+export function searchFetchedAction(payload) {
     return {
-        type: LOGIN_FETCHED,
+        type: SEARCH_FETCHED,
         payload
     };
 }
 
-export function loginErrorFetchAction(error) {
+export function searchErrorFetchAction(error) {
     return {
-        type: LOGIN_ERROR_FETCH,
+        type: SEARCH_ERROR_FETCH,
         error
     };
 }

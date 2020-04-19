@@ -5,7 +5,7 @@
 }
 
 .match-list-wrapper {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
     min-height: 300px;
@@ -18,55 +18,48 @@
             }
         }
     }
-    .match {
-        padding: 0.8rem 1rem;
-        margin-bottom: 20px;
-        color: $color-text;
+    .versus-header {
+        .head-warpper {
+            padding: 15px 0;
+            & > div:not(.compare) {
+                display: flex;
+                margin-bottom: 15px;
+                justify-content: space-between;
+                align-items: center;
+                .player-dropdown {
+                    width: 48%;
+                }
+            }
+            .compare {
+                text-align: center;
+                button {
+                    padding: 10px 20px;
+                }
+                .info i {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+    .versus-body {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        font-size: 18px;
-        border-radius: 2px;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        & > .loser {
-            background: url('../../assets/images/lost.png') no-repeat;
-            background-size: 251px 157px;
+        margin: 20px 0;
+        .batting,
+        .bowling,
+        .team {
+            width: 49%;
         }
     }
-    .match-team-1 {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        flex-basis: 33%;
-        &.loser {
-            background-position: 48% 71%;
+    .hhead {
+        font-size: 24px;
+        a {
+            &:hover {
+                text-decoration: none;
+            }
         }
-    }
-    .match-team-2 {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        flex-basis: 33%;
-        &.loser {
-            background-position: 48% 71%;
-        }
-    }
-    .team-sprite {
-        margin: 0.1rem 0.5rem;
-    }
-    .vs-details {
-        flex-basis: 33%;
-        text-align: center;
-        font-size: 14px;
-
-        .vs {
-            background: url('../../assets/images/versus.png') no-repeat;
-            background-size: 60px 70px;
-            background-position: 50%;
-            width: 60px;
-            height: 70px;
-            margin: 0 auto;
+        span {
+            padding: 0 10px;
         }
     }
 }

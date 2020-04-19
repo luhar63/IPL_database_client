@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { matches } from 'Constants/api';
+import { compare } from 'Constants/api';
 import { toast } from 'react-toastify';
 import { getMessage, getClasses } from 'Constants/app';
 import {
@@ -21,11 +21,25 @@ export function updateSelectedSeason(selectedSeason) {
     };
 }
 
-export function fetchMatches() {
+export function fetchComparison(type, p1, p2) {
+    let params;
+    if (type === 'player') {
+        params = {
+            p1,
+            p2
+        };
+    } else {
+        params = {
+            t1: p1,
+            t2: p2
+        };
+    }
     return dispatch => {
         dispatch(versusFetchingAction());
         axios
-            .get(matches)
+            .get(`${compare}/${type}`, {
+                params
+            })
             .then(response => {
                 if (!response.data.errorNum) {
                     dispatch(versusFetchedAction(response.data));

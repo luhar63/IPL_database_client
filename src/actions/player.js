@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { teams } from 'Constants/api';
+import { allPlayers } from 'Constants/api';
 import { toast } from 'react-toastify';
 import { getMessage, getClasses } from 'Constants/app';
 
@@ -27,7 +27,7 @@ function playerFetchedAction(payload) {
     };
 }
 
-function teamErrorFetchAction(error) {
+function playerErrorFetchAction(error) {
     return {
         type: PLAYER_SELECT_ERROR_FETCH,
         error
@@ -40,11 +40,11 @@ export function playerReset() {
     };
 }
 
-export function fetchTeams() {
+export function fetchSelectPlayer() {
     return dispatch => {
         dispatch(playerFetchingAction());
         axios
-            .get(teams)
+            .get(allPlayers)
             .then(response => {
                 if (Array.isArray(response.data)) {
                     dispatch(playerFetchedAction(response.data));
@@ -62,7 +62,7 @@ export function fetchTeams() {
                 // });
             })
             .catch(error => {
-                dispatch(teamErrorFetchAction(error));
+                dispatch(playerErrorFetchAction(error));
                 toast(getMessage('error', 'Error in fetching teams!'), {
                     position: toast.POSITION.TOP_CENTER,
                     className: getClasses('error')

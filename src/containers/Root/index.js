@@ -12,7 +12,9 @@ import Teams from 'Containers/Teams/Loadable';
 import Players from 'Containers/Players/Loadable';
 import Player from 'Containers/Player';
 import Stats from 'Containers/Stats/Loadable';
+import Versus from 'Containers/Versus/Loadable';
 import ToastClose from 'Components/ToastClose';
+
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import './style.scss';
@@ -23,60 +25,65 @@ import './normalize.scss';
 // component at the top-level.
 
 class Root extends Component {
-  state = {};
+    state = {};
 
-  render() {
-      return (
-          <div>
-              <ToastContainer
-                  autoClose={5000}
-                  className="toast-container"
-                  toastClassName="toast"
-                  bodyClassName="toast-body"
-                  closeButton={<ToastClose className="fa fa-times" />}
-              />
-              <Switch>
-                  <Redirect exact from="/" to="/home" />
-                  <Route exact path="/home" render={props => <Home {...props} />} />
-                  <Route
-                      exact
-                      path="/matches"
-                      render={props => <Matches {...props} />}
-                  />
-                  <Route
-                      exact
-                      path="/match/:matchid"
-                      render={props => <Match {...props} />}
-                  />
-                  <Route
-                      exact
-                      path="/player/:playerid"
-                      render={props => <Player {...props} />}
-                  />
-                  <Route
-                      exact
-                      path="/teams"
-                      render={props => <Teams {...props} />}
-                  />
-                  <Route
-                      exact
-                      path="/players"
-                      render={props => <Players {...props} />}
-                  />
-                  <Route
-                      exact
-                      path="/stats"
-                      render={props => <Stats {...props} />}
-                  />
-                  <Route
-                      exact
-                      path="*"
-                      render={props => <Page404 {...props} />}
-                  />
-              </Switch>
-          </div>
-      );
-  }
+    render() {
+        return (
+            <div>
+                <ToastContainer
+                    autoClose={5000}
+                    className="toast-container"
+                    toastClassName="toast"
+                    bodyClassName="toast-body"
+                    closeButton={<ToastClose className="fa fa-times" />}
+                />
+                <Switch>
+                    <Redirect exact from="/" to="/home" />
+                    <Route exact path="/home" render={props => <Home {...props} />} />
+                    <Route
+                        exact
+                        path="/matches"
+                        render={props => <Matches {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="/match/:matchid"
+                        render={props => <Match {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="/player/:playerid"
+                        render={props => <Player {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="/teams"
+                        render={props => <Teams {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="/players"
+                        render={props => <Players {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="/stats"
+                        render={props => <Stats {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="/versus"
+                        render={props => <Versus {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="*"
+                        render={props => <Page404 {...props} />}
+                    />
+                </Switch>
+            </div>
+        );
+    }
 }
 
 Root.propTypes = {
@@ -85,12 +92,12 @@ Root.propTypes = {
 
 function mapStateToProps() {
     return {
-    // user: state.userReducer.user
+        // user: state.userReducer.user
     };
 }
 function mapDispatchToProps() {
     return {
-    // getUser: getUser()
+        // getUser: getUser()
     };
 }
 

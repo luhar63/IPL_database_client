@@ -126,11 +126,11 @@ class Match extends Component {
                                                         </td>
                                                         <td>
                                                             {striker.OUT_TYPE ===
-                                                            '-1'
+                                                                '-1'
                                                                 ? 'not out'
                                                                 : this.getWicketOutput(
-                                                                      striker
-                                                                  )}
+                                                                    striker
+                                                                )}
                                                         </td>
                                                         <td>
                                                             {
