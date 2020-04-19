@@ -106,9 +106,9 @@ class Team extends Component {
                 </Helmet>
                 <Header match={match} />
                 <div>
-                <div className="score">
-                                    <span>ROSTER</span>{' '}
-                                </div>
+                    <div className="score">
+                        <span>ROSTER</span>{' '}
+                    </div>
                     <div className="">
                         {(isFetching) && <Loader />}
                         {error && <ErrorContainer errorMessage={error} />}
