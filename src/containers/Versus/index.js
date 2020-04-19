@@ -286,17 +286,17 @@ class Versus extends Component {
                                     </div>
 
                                     <div className="bowling">
-                                        <h4>Bowling Average trend</h4>
+                                        <h4>Bowling Average trend <span>(Lower is better)</span></h4>
                                         <Line data={this.createData('bowling average', 'AVG_BOWLING', data)} />
                                     </div>
                                 </div>
                                 <div className="versus-body">
                                     <div className="batting">
-                                        <h4>Strike rate batting trend</h4>
+                                        <h4>Strike rate batting trend </h4>
                                         <Line data={this.createData('Strike rate batting', 'SR_BATTING', data)} />
                                     </div>
                                     <div className="bowling">
-                                        <h4>Strike rate bowling trend</h4>
+                                        <h4>Strike rate bowling trend <span>(Lower is better)</span></h4>
                                         <Line data={this.createData('Strike rate bowling', 'SR_BOWLING', data)} />
                                     </div>
                                 </div>
@@ -306,7 +306,7 @@ class Versus extends Component {
                                         <Line data={this.createData('Total runs scored', 'RUNS_SCORED', data)} />
                                     </div>
                                     <div className="bowling">
-                                        <h4>Bowling economy trend</h4>
+                                        <h4>Bowling economy trend <span>(Lower is better)</span></h4>
                                         <Line data={this.createData('Economy', 'ECO', data)} />
                                     </div>
                                 </div>
