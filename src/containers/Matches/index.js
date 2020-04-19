@@ -17,10 +17,8 @@ class Matches extends Component {
     };
 
     componentDidMount() {
-        const { fetchmatches, matches } = this.props;
-        if (matches.data == null) {
-            fetchmatches();
-        }
+        const { fetchmatches } = this.props;
+        fetchmatches();
     }
 
     changeSelect = selectedSeason => {
@@ -35,6 +33,7 @@ class Matches extends Component {
             });
             updateselectedseason(selectedSeason);
         }, 1000);
+        // fetchmatches();
     };
 
     render() {
@@ -87,10 +86,10 @@ class Matches extends Component {
                                         <div
                                             className={`match-team-1 ${
                                                 item.team_winner_id ===
-                                                item.team_1_id
+                                                    item.team_1_id
                                                     ? 'winner'
                                                     : 'loser'
-                                            }`}
+                                                }`}
                                         >
                                             <div
                                                 className={`team-sprite small team-${item.team_1_id}`}
@@ -111,10 +110,10 @@ class Matches extends Component {
                                         <div
                                             className={`match-team-2 ${
                                                 item.team_winner_id ===
-                                                item.team_2_id
+                                                    item.team_2_id
                                                     ? 'winner'
                                                     : 'loser'
-                                            }`}
+                                                }`}
                                         >
                                             <div
                                                 className={`team-sprite small team-${item.team_2_id}`}
