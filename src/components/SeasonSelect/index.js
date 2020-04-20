@@ -25,7 +25,7 @@ class SeasonSelect extends Component {
             value
         } = this.props;
         let options = [];
-        if (season.data) {
+        if (season.data && Array.isArray(season.data)) {
             options = season.data.map(item => ({
                 value: item.id,
                 label: `Season ${item.id} (${item.year})`

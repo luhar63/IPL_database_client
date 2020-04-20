@@ -46,10 +46,10 @@ export function fetchTeams() {
         axios
             .get(teams)
             .then(response => {
-                if(Array.isArray(response.data)){
+                if (!response.data.errorNum) {
                     dispatch(teamFetchedAction(response.data));
                 }
-                else if(response.data.errNum) {
+                else {
                     toast(getMessage('error', 'Error in database!'), {
                         position: toast.POSITION.TOP_CENTER,
                         className: getClasses('error')

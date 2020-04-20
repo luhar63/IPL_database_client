@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import Header from 'Components/Header';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import Loader from 'Components/Loader';
-import { searchFetch, searchReset } from 'Containers/Home/calls';
+import { searchFetch, searchReset, tuplesFetch } from 'Containers/Home/calls';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ErrorContainer from '../../components/ErrorContainer';
@@ -34,10 +34,16 @@ class Home extends Component {
         });
     };
 
+    getTuples = () => {
+        const { fetchtuples } = this.props;
+        fetchtuples();
+    };
+
     render() {
         const { search } = this.state;
         const {
             search: { isFetching, error, data },
+            tuples,
             match
         } = this.props;
         return (
@@ -101,6 +107,14 @@ class Home extends Component {
                     }
                 </div>)
                 }
+                <div className="tuples">
+                    <Button onClick={this.getTuples} variant="danger">How many tuples do we have?</Button>
+                    {tuples.isFetching && <Loader />}
+                    {error && <ErrorContainer errorMessage={tuples.error} />}
+                    {!tuples.isFetching && tuples.data && <div className="tuple-record">
+                        We have {tuples.data[0].toLocaleString()} tuples in our database.
+                    </div>}
+                </div>
             </div>
         );
     }
@@ -109,14 +123,20 @@ Home.propTypes = {
     // children: PropTypes.element
     resetSearch: PropTypes.func.isRequired,
     fetchSearch: PropTypes.func.isRequired,
+    fetchtuples: PropTypes.func.isRequired,
     search: PropTypes.instanceOf(Object).isRequired,
+    tuples: PropTypes.instanceOf(Object).isRequired,
     match: PropTypes.instanceOf(Object).isRequired
 
 };
-const mapStateToProps = state => ({ search: state.home });
+const mapStateToProps = state => ({
+    search: state.home.search,
+    tuples: state.home.tuples
+});
 const mapDispatchToProps = {
     fetchSearch: searchFetch,
-    resetSearch: searchReset
+    resetSearch: searchReset,
+    fetchtuples: tuplesFetch
 };
 
 export default connect(

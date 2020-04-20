@@ -13,6 +13,7 @@ export const player = `${apiDomain}/player`;
 export const players = `${apiDomain}/players`;
 export const compare = `${apiDomain}/compare`;
 
+export const tuples = `${apiDomain}/rowcount`;
 export const team = `${apiDomain}/team`;
 export const register = 'https://reqres.in/api/register';
 

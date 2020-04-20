@@ -46,16 +46,14 @@ export function fetchSelectPlayer() {
         axios
             .get(allPlayers)
             .then(response => {
-                if (Array.isArray(response.data)) {
+                if (!response.data.errorNum) {
                     dispatch(playerFetchedAction(response.data));
-                }
-                else if (response.data.errNum) {
+                } else {
                     toast(getMessage('error', 'Error in database!'), {
                         position: toast.POSITION.TOP_CENTER,
                         className: getClasses('error')
                     });
                 }
-
                 // toast(getMessage('error', 'Successfully logged in!'), {
                 //     position: toast.POSITION.TOP_CENTER,
                 //     className: getClasses('success')

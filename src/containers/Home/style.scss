@@ -31,3 +31,15 @@
         color: #444;
     }
 }
+
+.tuples {
+    max-width: 960px;
+    margin: 20px auto;
+    margin-top: 90px;
+    text-align: center;
+    position: relative;
+    min-height: 100px;
+    .tuple-record {
+        margin-top: 20px;
+    }
+}

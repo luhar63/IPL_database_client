@@ -25,7 +25,7 @@ class TeamSelect extends Component {
             value
         } = this.props;
         let options = [];
-        if (team.data) {
+        if (team.data && Array.isArray(team.data)) {
             options = team.data.map(item => ({
                 value: item.id,
                 label: `${item.name}`

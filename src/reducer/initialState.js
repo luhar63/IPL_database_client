@@ -1,7 +1,10 @@
 export default {
     season: {},
     team: {},
-    home: {},
+    home: {
+        search: {},
+        tuples: {}
+    },
     teams: {},
     matches: {},
     stats: {
@@ -13,6 +16,5 @@ export default {
     matchdetails: {},
     playerdetails: {},
     selectPlayer: {},
-    team: {},
     teamdetails: {}
 };
